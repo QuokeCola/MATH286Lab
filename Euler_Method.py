@@ -6,6 +6,7 @@ class Euler(object):
         self.step = step
         self.start_point = start_point
         self.stop_range = stop_range
+        self.overFlow = False
 
     def compute(self):
         return self.loop(self.start_point)
@@ -29,8 +30,9 @@ class Euler(object):
                 self.loop(point_new)
             except OverflowError:
                 print('Warning: Euler Overflow')
-                return self.point_hist
+                self.overFlow = True
+                return (self.point_hist, self.overFlow)
         else:
-            return self.point_hist
-        return self.point_hist
+            return (self.point_hist, self.overFlow)
+        return (self.point_hist, self.overFlow)
 
