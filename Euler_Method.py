@@ -29,7 +29,7 @@ class Euler(object):
                 self.point_hist.append(point_new)
                 self.loop(point_new)
             except OverflowError:
-                print('Warning: Euler Overflow')
+                print('[\033[1;31mWarning\033[0m] Euler Overflow')
                 self.overFlow = True
                 return (self.point_hist, self.overFlow)
         else:

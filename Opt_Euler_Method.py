@@ -32,7 +32,7 @@ class OptEu(object):
                 self.point_hist.append(point_new)
                 self.loop(point_new)
             except OverflowError:
-                print('Warning: Optimize Euler Overflow')
+                print('[\033[1;31mWarning\033[0m] Optimize Euler Overflow')
                 self.overFlow = True
                 return (self.point_hist, self.overFlow)
         else:

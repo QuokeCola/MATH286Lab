@@ -38,7 +38,7 @@ class RunKu(object):
                 self.point_hist.append(point_new)
                 self.loop(point_new)
             except OverflowError:
-                print('Warning: RungKutta Overflow')
+                print('[\033[1;31mWarning\033[0m] RungKutta Overflow')
                 self.overFlow = True
                 return (self.point_hist, self.overFlow)
         else:

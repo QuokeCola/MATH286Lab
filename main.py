@@ -26,7 +26,7 @@ for end_Scale in np.linspace(0.85,0.86,100):
     EulRes = euler.compute()
     OptEuRes = optEu.compute()
     RunKuRes = runKu.compute()
-    print(EulRes[1])
+
     if (EulRes[1] or OptEuRes[1]) or RunKuRes[1]:
         break
     print('Euler: ' + str(EulRes[0][-1]))
@@ -59,21 +59,21 @@ for i in OptEuRes[0]:
 for i in RunKuRes[0]:
     x3.append(i[0])
     y3.append(i[1])
-print("successfully Load Results")
+print("[\033[1;32mInfo\033[0m] Successfully load Results")
 x,y = np.meshgrid(np.linspace(-5,5,20),np.linspace(-5,5,20))
 u = np.linspace(1,1,400)
 u = u.reshape(20,20)
 v = np.linspace(0,0,400)
 v = v.reshape(20,20)
 
-print("successfully initialize Meshes")
+print("[\033[1;32mInfo\033[0m] Successfully initialize Meshes")
 for i in range(0,20):
     for j in range(0,20):
         v[i][j] = (diffF(x[i][j],y[i][j]))/math.sqrt(1+diffF(x[i][j],y[i][j])*diffF(x[i][j],y[i][j]))
         u[i][j] = 1/math.sqrt(1+diffF(x[i][j],y[i][j])*diffF(x[i][j],y[i][j]))
-print("successfully initialize Analytic Plot")
+print("[\033[1;32mInfo\033[0m] Successfully initialize Analytic Plot")
 plt.quiver(x,y,u,v)
-print("successfully initialize Direction Field")
+print("[\033[1;32mInfo\033[0m] Successfully initialize Direction Field")
 plt.scatter(x1,y1,color = 'blue', label = 'Euler')
 plt.scatter(x2,y2,color = 'red', label = 'OptEuler')
 plt.scatter(x3,y3,color = 'green', label = 'Rung Kutta')
