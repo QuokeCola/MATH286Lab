@@ -18,13 +18,18 @@ class Euler(object):
     def loop(self, point):
         x = point[0]
         y = point[1]
-        if x < self.stop_range:
-            f = self.diff_func(x, y)
-            x_new = x + self.step
-            y_new = y + self.step * f
-            point_new = (x_new, y_new)
-            self.point_hist.append(point_new)
-            self.loop(point_new)
+        outOfBounds = (x>self.stop_range and self.step > 0) or (x<self.stop_range and self.step < 0)
+        if not outOfBounds:
+            try:
+                f = self.diff_func(x, y)
+                x_new = x + self.step
+                y_new = y + self.step * f
+                point_new = (x_new, y_new)
+                self.point_hist.append(point_new)
+                self.loop(point_new)
+            except OverflowError:
+                print('Warning: Euler Overflow')
+                return self.point_hist
         else:
             return self.point_hist
         return self.point_hist

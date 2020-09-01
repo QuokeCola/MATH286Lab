@@ -18,16 +18,21 @@ class OptEu(object):
     def loop(self, point):
         x = point[0]
         y = point[1]
-        if x < self.stop_range:
-            f_low = self.diff_func(x, y)
-            x_high = x + self.step
-            y_high = y + self.step * f_low
-            f_high = self.diff_func(x_high, y_high)
-            x_new = x_high
-            y_new = y + self.step * 0.5 * (f_low + f_high)
-            point_new = (x_new, y_new)
-            self.point_hist.append(point_new)
-            self.loop(point_new)
+        outOfBounds = (x>self.stop_range and self.step > 0) or (x<self.stop_range and self.step < 0)
+        if not outOfBounds:
+            try:
+                f_low = self.diff_func(x, y)
+                x_high = x + self.step
+                y_high = y + self.step * f_low
+                f_high = self.diff_func(x_high, y_high)
+                x_new = x_high
+                y_new = y + self.step * 0.5 * (f_low + f_high)
+                point_new = (x_new, y_new)
+                self.point_hist.append(point_new)
+                self.loop(point_new)
+            except OverflowError:
+                print('Warning: Optimize Euler Overflow')
+                return self.point_hist
         else:
             return self.point_hist
         return self.point_hist
