@@ -17,13 +17,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 start_Point = (0, 1)
-Step = 0.0001
+Default_Step = 0.01
 sys.setrecursionlimit(100000)
 
 def diffF(x,y):
     return y*y+x*y+x*x
 
-def Single_Calculation(end_Scale):
+def Single_Calculation(Step, end_Scale):
     euler = Euler(diffF, Step, start_Point, end_Scale)
     optEu = OptEu(diffF, Step, start_Point, end_Scale)
     runKu = RunKu(diffF, Step, start_Point, end_Scale)
@@ -48,17 +48,6 @@ def showRes(ResTup):
     else:
         print('Rung Kutta: ' + str(ResTup[2][0][1][-1]))
 
-def process_bar(percent, start_str='', end_str='', total_length=0):
-    bar = ''.join(["\033[47m%s\033[0m"%'   '] * int(percent * total_length)) + ''
-    bar = '\r' + start_str + bar.ljust(total_length) + ' {:0>4.1f}%|'.format(percent*100) + end_str
-    print(bar, end='', flush=True)
-
-def callbackfunc(retval):
-    FinalRes.append(retval)
-    percent = len(FinalRes) / len(end_Scale_D)
-    end_str = '100%'
-    process_bar(percent, start_str='', end_str=end_str, total_length=15)
-
 if __name__ == '__main__':
     # Initialize
     pool = multiprocessing.Pool()
@@ -67,10 +56,24 @@ if __name__ == '__main__':
 
     # Run Calculation
     print("[\033[1;33mInfo\033[0m] Start Computing Numerical Results")
-    for item in end_Scale_D:
-        pool.apply_async(Single_Calculation, args=[item], callback=callbackfunc)
-    pool.close()
-    pool.join()
+    y = start_Point[1]
+    x = start_Point[0]+Default_Step * 10
+    Step = Default_Step
+    trial = 0
+    while Step > 0.001:
+        print('[\033[1;32mInfo\033[0m]Running Trial' + str(trial))
+        y = 0
+        while not (str(y) == 'inf' or str(y) == '-inf'):
+            x += Step
+            Res = Single_Calculation(0.001, x)
+            y = Res[2][0][1][-1]
+            print('[\033[1;32mStatus\033[0m]On range ' + str(x))
+        x = x - Step
+        Step = Step / 2
+        trial += 1
+    x -= (Step*2)
+    Res = Single_Calculation(Step, x)
+
     for res in FinalRes:
         showRes(res)
     print("[\033[1;32mInfo\033[0m] Numerical Compute Finished")
@@ -78,9 +81,13 @@ if __name__ == '__main__':
     # Run Analytical Results
 
     analy = analytical()
-    analy.generate_subs(200)
-    AnaRes = analy.compute(0.85, 10000)
-
+    analy.generate_subs(2000)
+    AnaRes = analy.compute(0.88, 1000)
+    for i in range(len(AnaRes[0])):
+        print(AnaRes[1][i])
+        if str(AnaRes[1][i]) == 'inf':
+            print(AnaRes[0][i-1])
+            break
     # Plot Direction Field
     funcDF = FunDF(diffF,-5,5,-5,10000,100,100)
     funcDF.generate()

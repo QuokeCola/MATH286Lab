@@ -13,9 +13,12 @@ class Euler(object):
 
     def compute(self):
         for i in self.x:
-            f = self.diff_func(i,self.y[len(self.y)-1])
-            y_new = self.y[len(self.y)-1]+self.step*f
-            self.y.append(y_new)
+            try:
+                f = self.diff_func(i,self.y[len(self.y)-1])
+                y_new = self.y[len(self.y)-1]+self.step*f
+                self.y.append(y_new)
+            except ValueError:
+                return ([self.x, self.y], True)
         self.y.pop()
         return ([self.x, self.y], False)
 

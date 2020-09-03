@@ -13,18 +13,20 @@ class RunKu(object):
 
     def compute(self):
         for i in self.x:
-
-            k1 = self.diff_func(i, self.y[len(self.y)-1])
-            x_1 = i + self.step * 0.5
-            y_1 = self.y[len(self.y)-1] + self.step * k1 * 0.5
-            k2 = self.diff_func(x_1, y_1)
-            x_2 = i + self.step * 0.5
-            y_2 = self.y[len(self.y)-1] + self.step * k2 * 0.5
-            k3 = self.diff_func(x_2, y_2)
-            x_3 = i + self.step
-            y_3 = self.y[len(self.y)-1] + self.step * k3
-            k4 = self.diff_func(x_3, y_3)
-            y_new = self.y[len(self.y)-1] + self.step / 6 * (k1 + 2 * (k2 + k3) + k4)
-            self.y.append(y_new)
+            try:
+                k1 = self.diff_func(i, self.y[len(self.y)-1])
+                x_1 = i + self.step * 0.5
+                y_1 = self.y[len(self.y)-1] + self.step * k1 * 0.5
+                k2 = self.diff_func(x_1, y_1)
+                x_2 = i + self.step * 0.5
+                y_2 = self.y[len(self.y)-1] + self.step * k2 * 0.5
+                k3 = self.diff_func(x_2, y_2)
+                x_3 = i + self.step
+                y_3 = self.y[len(self.y)-1] + self.step * k3
+                k4 = self.diff_func(x_3, y_3)
+                y_new = self.y[len(self.y)-1] + self.step / 6 * (k1 + 2 * (k2 + k3) + k4)
+                self.y.append(y_new)
+            except OverflowError:
+                return ([self.x, self.y], True)
         self.y.pop()
         return ([self.x, self.y], False)
