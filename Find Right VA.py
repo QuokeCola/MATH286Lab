@@ -60,43 +60,45 @@ if __name__ == '__main__':
     x = start_Point[0]+Default_Step * 10
     Step = Default_Step
     trial = 0
-    while Step > 0.001:
-        print('[\033[1;32mInfo\033[0m]Running Trial' + str(trial))
-        y = 0
-        while not (str(y) == 'inf' or str(y) == '-inf'):
-            x += Step
-            Res = Single_Calculation(0.001, x)
-            y = Res[2][0][1][-1]
-            print('[\033[1;32mStatus\033[0m]On range ' + str(x))
-        x = x - Step
-        Step = Step / 2
-        trial += 1
-    x -= (Step*2)
-    Res = Single_Calculation(Step, x)
-
-    for res in FinalRes:
-        showRes(res)
+    # while Step > 0.001:
+    #     print('[\033[1;32mInfo\033[0m]Running Trial' + str(trial))
+    #     y = 0
+    #     while not (str(y) == 'inf' or str(y) == '-inf'):
+    #         x += Step
+    #         Res = Single_Calculation(0.001, x)
+    #         y = Res[2][0][1][-1]
+    #         print('[\033[1;32mStatus\033[0m]On range ' + str(x))
+    #     x = x - Step
+    #     Step = Step / 2
+    #     trial += 1
+    # x -= (Step*2)
+    # Res = Single_Calculation(Step, x)
+    Res = Single_Calculation(0.000001, 0.858876)
+    showRes(Res)
+    # for i in np.linspace(0.8588867,0.828800,68):
+    # for res in FinalRes:
+    #     showRes(res)
     print("[\033[1;32mInfo\033[0m] Numerical Compute Finished")
 
     # Run Analytical Results
 
-    analy = analytical()
-    analy.generate_subs(2000)
-    AnaRes = analy.compute(0.88, 1000)
-    for i in range(len(AnaRes[0])):
-        print(AnaRes[1][i])
-        if str(AnaRes[1][i]) == 'inf':
-            print(AnaRes[0][i-1])
-            break
-    # Plot Direction Field
-    funcDF = FunDF(diffF,-5,5,-5,10000,100,100)
-    funcDF.generate()
-
-    # Plot Points
-    plt.scatter(FinalRes[0][0][0][0],FinalRes[0][0][0][1],color = 'blue', label = 'Euler')
-    plt.scatter(FinalRes[0][1][0][0],FinalRes[0][1][0][1],color = 'red', label = 'OptEuler')
-    plt.scatter(FinalRes[0][2][0][0],FinalRes[0][2][0][1],color = 'green', label = 'Rung Kutta')
-    plt.scatter(AnaRes[0], AnaRes[1], color ='purple', label ='Analysis')
-    plt.legend(loc = 'best')
-    plt.show()
-    print("[\033[1;32mInfo\033[0m] Plot Generated")
+    # analy = analytical()
+    # analy.generate_subs(2000)
+    # AnaRes = analy.compute(0.88, 1000)
+    # # for i in range(len(AnaRes[0])):
+    # #     print(AnaRes[1][i])
+    # #     if str(AnaRes[1][i]) == 'inf':
+    # #         print(AnaRes[0][i-1])
+    # #         break
+    # # Plot Direction Field
+    # funcDF = FunDF(diffF,-5,5,-5,10000,100,100)
+    # funcDF.generate()
+    #
+    # # Plot Points
+    # plt.scatter(Res[0][0][0],Res[0][0][1],color = 'blue', label = 'Euler')
+    # plt.scatter(Res[1][0][0],Res[1][0][1],color = 'red', label = 'OptEuler')
+    # plt.scatter(Res[2][0][0],Res[2][0][1],color = 'green', label = 'Rung Kutta')
+    # plt.scatter(AnaRes[0], AnaRes[1], color ='purple', label ='Analysis')
+    # plt.legend(loc = 'best')
+    # plt.show()
+    # print("[\033[1;32mInfo\033[0m] Plot Generated")
