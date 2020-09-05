@@ -16,15 +16,17 @@ import numpy as np
 sys.setrecursionlimit(100000)
 
 start_Point = (0, 1)
-Step = 0.01
-EndScale = 0.85
+Step = -0.0001
+EndScale = -40
+
+AnaEnable = False
 
 Analytical_Subjects = 1000
 Analytical_Points = 100
 
 
 def diffF(x,y):
-    return y*y+x*y+x*x
+    return y*y*y+x*x*y+x*y*y+x*x*x
 
 def Single_Calculation(Step, end_Scale):
     euler = Euler(diffF, Step, start_Point, end_Scale)
@@ -75,9 +77,10 @@ if __name__ == '__main__':
     print('[\033[1;32mInfo\033[0m] Log Results Finished')
 
     # Run Analytical Results
-    analy = analytical()
-    analy.generate_subs(Analytical_Subjects)
-    anares = analy.compute(EndScale, Analytical_Points)
+    if (AnaEnable):
+        analy = analytical()
+        analy.generate_subs(Analytical_Subjects)
+        anares = analy.compute(EndScale, Analytical_Points)
 
     # Plot Direction Field
     LowX = Res[0][0][0][0]
@@ -90,22 +93,25 @@ if __name__ == '__main__':
             HighY = Res[2][0][1][i-1]
             print(HighY)
             break
-    for i in range(len(anares[1])):
-        if not str(anares[1][i]).find('inf') == -1:
-            HighY = anares[1][i-1]
-            print(HighY)
-            break
-    if HighY == start_Point[1]:
-        HighY = anares[1][-1]
+    if AnaEnable:
+        for i in range(len(anares[1])):
+            if not str(anares[1][i]).find('inf') == -1:
+                HighY = anares[1][i-1]
+                print(HighY)
+                break
+        if HighY == start_Point[1]:
+            HighY = anares[1][-1]
+    HighY = Res[2][0][1][-1]
     funcDF = FunDF(diffF,LowX,HighX,LowY,HighY,20,20)
     funcDF.generate()
 
     # Plot Points
     print("[\033[1;33mInfo\033[0m] Add points to plot")
-    plt.scatter(Res[0][0][0],Res[0][0][1],color = 'blue', label = 'Euler')
-    plt.scatter(Res[1][0][0],Res[1][0][1],color = 'red', label = 'OptEuler')
+    # plt.scatter(Res[0][0][0],Res[0][0][1],color = 'blue', label = 'Euler')
+    # plt.scatter(Res[1][0][0],Res[1][0][1],color = 'red', label = 'OptEuler')
     plt.scatter(Res[2][0][0],Res[2][0][1],color = 'green', label = 'Rung Kutta')
-    plt.scatter(anares[0], anares[1], color ='purple', label ='Analysis')
+    if AnaEnable:
+        plt.scatter(anares[0], anares[1], color ='purple', label ='Analysis')
     plt.legend(loc = 'best')
     print("[\033[1;32mInfo\033[0m] Points added to plot")
     print("[\033[1;33mInfo\033[0m] Generating plot")
