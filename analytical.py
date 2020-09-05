@@ -3,11 +3,11 @@ import multiprocessing
 class analytical:
     def __init__(self):
 
-        self.a = [0,0,0,0,0]
+        self.a = [0,0,0,0]
         self.a[0] = 1.0
         self.a[1] = self.a[0] ** 2
-        self.a[2] = 0.5 * (2 * self.a[0] * self.a[1] + self.a[2])
-        self.a[3] = (1 + self.a[1] ** 2 + 2 * self.a[0] * self.a[2] + self.a[1])
+        self.a[2] = 0.5 * (2 * self.a[0] * self.a[1] + self.a[0])
+        self.a[3] = (1 + self.a[1] ** 2 + 2 * self.a[0] * self.a[2] + self.a[1])/3
         self.y_list = []
         self.point_nums = 1
     def generate_subs(self, subs):
@@ -17,10 +17,12 @@ class analytical:
             for i in range(0, len(self.a)):
                 new_a += self.a[i]*self.a[len(self.a)-1-i]
             self.a.append(new_a/len(self.a))
+
             if len(self.a)%100 == 0:
                 percent = len(self.a)/subs
                 end_str = '100%'
                 self.process_bar(percent, end_str=end_str, total_length=15)
+
         print("\n[\033[1;32mInfo\033[0m] Successfully Compute Analytical Subjects")
 
     def process_bar(self, percent, start_str='[\033[1;33mProgress\033[0m]|', end_str='', total_length=0):
