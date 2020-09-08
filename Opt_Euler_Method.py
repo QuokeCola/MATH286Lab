@@ -29,7 +29,7 @@ class OptEu(object):
                 y_new = self.y[len(self.y)-1] + self.step * 0.5 * (f_low + f_high)
                 self.y.append(y_new)
             except OverflowError:
-                return ([self.x, self.y], True)
+                return [self.x, self.y]
         self.y.pop()
         print("\n[\033[1;32mInfo\033[0m] Compute Improved Euler Results Finished")
-        return ([self.x, self.y], False)
+        return [self.x, self.y]

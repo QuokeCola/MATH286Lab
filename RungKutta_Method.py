@@ -35,7 +35,7 @@ class RunKu(object):
                 y_new = self.y[len(self.y)-1] + self.step / 6 * (k1 + 2 * (k2 + k3) + k4)
                 self.y.append(y_new)
             except OverflowError:
-                return ([self.x, self.y], True)
+                return [self.x, self.y]
         self.y.pop()
         print("\n[\033[1;32mInfo\033[0m] Compute Runge Kutta Results Finished")
-        return ([self.x, self.y], False)
+        return [self.x, self.y]

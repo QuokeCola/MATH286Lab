@@ -11,6 +11,7 @@ class analytical:
         self.a[3] = (1 + self.a[1] ** 2 + 2 * self.a[0] * self.a[2] + self.a[1])/3
         self.y_list = []
         self.point_nums = 1
+
     def generate_subs(self, subs):
         print("[\033[1;33mInfo\033[0m] Start Computing Analytical Subjects")
         while len(self.a) < subs:
@@ -20,24 +21,26 @@ class analytical:
             self.a.append(new_a/len(self.a))
 
             if len(self.a)%100 == 0:
-                percent = len(self.a)/subs
+                Percent = len(self.a)/subs
                 end_str = '100%'
-                self.process_bar(percent, end_str=end_str, total_length=15)
+                process_bar(Percent, end_str=end_str, total_length=15)
 
         print("\n[\033[1;32mInfo\033[0m] Successfully Compute Analytical Subjects")
 
     def callbackfunc(self, retval):
         self.y_list.append(retval)
-        percent = len(self.y_list) / self.point_nums
+        Percent = len(self.y_list) / self.point_nums
         end_str = '100%'
-        self.process_bar(percent, end_str=end_str, total_length=15)
+        process_bar(Percent, end_str=end_str, total_length=15)
 
     def single_step(self, x):
         y = 0
-        for i in range(0, len(self.a)):
+        y+=self.a[0]
+        for i in range(1, len(self.a)):
             y += self.a[i] * (x ** i)
         return y
-    def compute(self, end_scale, point_nums):
+
+    def compute(self, end_scale, point_nums = 1):
         print("[\033[1;33mInfo\033[0m] Start Compute Analytical Result")
         pool = multiprocessing.Pool()
         x_list = np.linspace(0, end_scale, point_nums)

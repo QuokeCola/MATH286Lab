@@ -26,8 +26,8 @@ class Euler(object):
                 y_new = self.y[len(self.y)-1]+self.step*f
                 self.y.append(y_new)
             except ValueError:
-                return ([self.x, self.y], True)
+                return [self.x, self.y]
         self.y.pop()
         print("\n[\033[1;32mInfo\033[0m] Compute Euler Results Finished")
-        return ([self.x, self.y], False)
+        return [self.x, self.y]
 

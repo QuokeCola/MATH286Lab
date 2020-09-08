@@ -52,7 +52,7 @@ At first, we plot the direction field of (1). After connecting the direction arr
 	\begin{center}
 		\scriptsize
 		\renewcommand{\arraystretch}{1.3} % default is 1.0
-		\begin{tabular}{p{10cm}|p{10cm}}
+		\begin{tabular}{p{8cm}|p{8cm}}
 			\textbf{Euler}: <code>			& \quad\textbf{Heun}: <code>				\\
 			$y_{n+1} = y_n+h \cdot f(t_n, y_n)$	& \quad$ k_{1,n} = f(t_n,y_n)$				\\
 			$ t_{n+1} = t_n+h$				& \quad$ k_{2,n} = f(t_n+h, y_n+h \cdot k_{1,n})$	\\
@@ -77,7 +77,7 @@ At first, we plot the direction field of (1). After connecting the direction arr
 \begin{table}[H]
 	\begin{center}
 		\scriptsize
-		\renewcommand{\arraystretch}{1.5} % default is 1.0
+		\renewcommand{\arraystretch}{1.2} % default is 1.0
 		\begin{tabular}{l|r|r|r|r|r|r|r|r}
 			\textbf{T}	&\textbf{-2.3}	&\textbf{-2.2}	&\textbf{-2.1}	&\textbf{-2.0}	&\textbf{0.7}	&\textbf{0.8}	&\textbf{0.9}	&\textbf{1.0}	\\
 			\hline
@@ -97,7 +97,7 @@ Combined with the table, the direction field and the hand-drawing sketches, we c
 	
 	\begin{center}
 		\begin{threeparttable}
-			\renewcommand{\arraystretch}{1.5} % default is 1.0
+			\renewcommand{\arraystretch}{1.2} % default is 1.0
 			\begin{tabular}{r|r|r|r|r|r|r|r|r|r|r|r|r}
 				\multirow{2}*{\diagbox{h}{t}}&\multicolumn{3}{c|}{-2.2} &\multicolumn{3}{c|}{-2.1}&\multicolumn{3}{c|}{0.8}&\multicolumn{3}{c}{0.9} \\
 				\cline{2-13}
@@ -127,7 +127,7 @@ The large difference among the computed values with different step size at $t = 
 	\scriptsize
 	
 	\begin{center}
-		\renewcommand{\arraystretch}{1.5} % default is 1.0
+		\renewcommand{\arraystretch}{1.2} % default is 1.0
 		\begin{tabular}{l|r|r|r|r|r|r|r}
 			\textbf{T}	&\textbf{-2.1206582}	&\textbf{-2.1206583}	&\textbf{-2.1206584}	&\textbf{-2.1206585}		&\textbf{-2.1206586}	&\textbf{-2.1206587}	&\textbf{-2.1206588}	\\
 			\hline
@@ -146,7 +146,7 @@ The large difference among the computed values with different step size at $t = 
 	\scriptsize
 	
 	\begin{center}
-		\renewcommand{\arraystretch}{1.5} % default is 1.0
+		\renewcommand{\arraystretch}{1.2} % default is 1.0
 		\begin{tabular}{l|r|r|r|r|r|r}
 			\textbf{T}	&\textbf{0.8588757}	&\textbf{0.8588758}	&\textbf{0.8588759}	&\textbf{0.8588760}		&\textbf{0.8588761}	&\textbf{0.8588762}	\\
 			\hline
@@ -242,12 +242,14 @@ In our code we could modify the number of terms based on the accuracy we need. <
 	\end{center}
 	\noindent Which agrees with our results in numerical method well.
 
-	%\vfill\null
+	\vfill\null
 	\columnbreak
 
-	\paragraph{\small Analytical Method on the Left} Note that, on $t \leq 0$,
+	\paragraph{\small Analytical Method on the Left} 
 
 	~\\
+	
+	\noindent Note that, on $t \leq 0$,
 
 	\begin{center}
 		$y'=y^2+t \cdot y+t^2 \geq t \cdot y$
@@ -274,7 +276,7 @@ In our code we could modify the number of terms based on the accuracy we need. <
 		$y_1=\sqrt{3}tan({\sqrt{3} \cdot C_1+\sqrt{3} \cdot t})+1$
 	\end{center}
 
-	\noindent Instead of using the initial value $y(0)=1$, we use $y(−2)=−7.1421908$ which is obtained by Runge-kutta to get a more accurate approximation of the vertical asymptote. Then we obtain: 
+	\noindent Instead of using the initial value $y(0)=1$ , we use $y(-2)=-7.1421908$ which is obtained by Runge-kutta to get a more accurate approximation of the vertical asymptote. Then we obtain: 
 	
 	\begin{center}
 		$C_1=1.214113538$
@@ -307,10 +309,60 @@ In our code we could modify the number of terms based on the accuracy we need. <
 		$-2.1210 \leq t \leq -2.1166$
 	\end{center}
 
-	\noindent Which agrees our result in numerical approximation well.
+	\noindent Which conforms our result in numerical approximation well.
 
 \end{multicols}
 
+\newpage
 \subsection{Conclusion}
+
+\subsubsection{Error Comparison}
+ 
+\indent We treat the value calculated by power series at t = 0.8 (within 4000 terms) as the 'exact value'. Based on this we started our error analysis. Table \ref{tab:tab1.4.1.1} shows the values calculated by three numerical methods at t=0.8 and their error compared with the 'exact value'.We could find that in this problem, if we take the same step size, Runge-Kutta method and Improved Euler method performs better in terms of accuracy.
+\begin{table}[H]
+	\begin{center}
+		\small
+		\begin{tabular}{r|r|r|r|r|r|r}
+			\renewcommand{\multirowsetup}{\centering}
+			exact value:&\multirow{2}*{ Euler}&\multirow{2}*{ Euler Error}&\multirow{2}*{ Heun}&\multirow{2}*{ Heun Error}&\multirow{2}*{ Runge-Kutta}&\multirow{2}*{ RK Error}\\
+			 16.565268184&&&&&&\\
+			 \hline
+			h = 0.01		&10.67203515	&-35.5758\%		&13.9787667		&-15.6140\%	&14.10105738	&-14.8758\%	\\
+			h = 0.001		&15.60414001	&-5.8021\%		&16.27971628	&-1.7238\%	&16.28178618	&-1.7113\%	\\
+			h = 0.0001		&16.46233358	&-0.6214\%		&16.53646519	&-0.1739\%	&16.53648707	&-0.1737\%	\\
+			h = 0.00001		&16.55490058	&-0.0626\%		&16.56238545	&-0.0174\%	&16.56238567	&-0.0174\%	\\
+			h = 0.000001	&16.56451894	&-0.0045\%		&16.56526818	&0.0000\%	&16.56526818	&0.0000\%	\\
+			h = 0.0000001	&16.56519326	&-0.0005\%		&16.56526818	&0.0000\%	&16.56526818	&0.0000\%	\\
+		\end{tabular}
+		\setlength{\abovecaptionskip}{0.1cm}
+		\setlength{\belowcaptionskip}{-0.9cm}
+		\caption{Error Analysis} \label{tab:tab1.4.1.1}
+	\end{center}
+\end{table}
+
+\subsubsection{Conclusion}
+
+In this problem we try to solve the IVP $y'=y^2+t \cdot y+t^2, y(0)=1$ with three numerical method: Euler Method, Heun Method and Runge-Kutta Method. In the last section we calculated the error at $t = 0.8$ of three methods with different steps and we could find that, Runge-Kutta achieves highest accuracy under same step size. In this problem The Heun method also achieves good accuracy. But the accuracy comes with price. While calculating we found that Euler Method is faster than the other two methods. The gap is widened when smaller step was applied. We recorded the time each method spent under the condition that $h=0.0000001$ and found that the Heun Method spent about 1 time longer than Euler, while Runge-Kutta roughly spent 3 times longer.
+
+\begin{table}[H]
+	\begin{center}
+		\small
+		\begin{tabular}{c|c|c}
+			\renewcommand{\multirowsetup}{\centering}
+			Euler			&Heun			&Runge Kutta	\\
+			\hline
+			8.82 sec		&18.71 sec		&41.04 sec		\\
+		\end{tabular}
+		\setlength{\abovecaptionskip}{0.1cm}
+		\setlength{\belowcaptionskip}{-0.9cm}
+		\caption{Time Spent to Calculate $y(0.8), h = 0.0000001$} \label{tab:tab1.4.2.1}
+	\end{center}
+\end{table}
+
+During our calculation, we find that the values closed to the asymptotes are more than tricky. Therefore, to determine the more accurate locations of asymptotes and verify our numerical methods, squeeze rule has been used. Figure \ref{fig:1.4.2.1} is the plot based on Runge-Kutta method with step size 0.0000001.
+
+\begin{center}
+	\includegraphics[scale=0.3]{P1FinalSolution.png}\label{fig:1.4.2.1}
+\end{center}
 
 \end{document}
