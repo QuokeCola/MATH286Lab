@@ -16,17 +16,19 @@ import numpy as np
 sys.setrecursionlimit(100000)
 
 start_Point = (0, 1)
-Step = -0.0001
-EndScale = -40
+Step = -0.0000001
+EndScale = -2.2
 
 AnaEnable = False
+GraphicEnable = False
 
 Analytical_Subjects = 1000
 Analytical_Points = 100
+enable_safe_print = False
 
 
 def diffF(x,y):
-    return y*y*y+x*x*y+x*y*y+x*x*x
+    return y*y+x*y+x*x
 
 def Single_Calculation(Step, end_Scale):
     euler = Euler(diffF, Step, start_Point, end_Scale)
@@ -39,16 +41,16 @@ def Single_Calculation(Step, end_Scale):
 
 def showRes(ResTup):
     print('-----------------Trial '+str(ResTup[3]) +'-----------------')
-    if not (str(ResTup[0][0][1][-1]).find('inf') == -1):
+    if not (str(ResTup[0][0][1][-1]).find('inf') == -1) and enable_safe_print:
         print('[\033[1;31mWarning\033[0m] Euler Overflow')
     else:
         print('Euler: ' + str(ResTup[0][0][1][-1]))
 
-    if not (str(ResTup[1][0][1][-1]).find('inf') == -1):
+    if not (str(ResTup[1][0][1][-1]).find('inf') == -1) and enable_safe_print:
         print('[\033[1;31mWarning\033[0m] Advanced Euler Overflow')
     else:
         print('Opt Euler: ' + str(ResTup[1][0][1][-1]))
-    if not (str(ResTup[2][0][1][-1]).find('inf') == -1):
+    if not (str(ResTup[2][0][1][-1]).find('inf') == -1) and enable_safe_print:
         print('[\033[1;31mWarning\033[0m] Rung Kutta Overflow')
     else:
         print('Rung Kutta: ' + str(ResTup[2][0][1][-1]))
@@ -63,15 +65,12 @@ def log_Res(Res):
     file.close()
 
 if __name__ == '__main__':
-    # Initialize
-    pool = multiprocessing.Pool()
-    end_Scale_D = np.linspace(0.85,0.86,100)
-    FinalRes = []
 
     # Run Calculation
     print("[\033[1;33mInfo\033[0m] Start Computing Numerical Results")
     Res=Single_Calculation(Step,EndScale)
     print("[\033[1;32mInfo\033[0m] Numerical Compute Finished")
+    showRes(Res)
     print('[\033[1;33mInfo\033[0m] Start log Results')
     log_Res(Res)
     print('[\033[1;32mInfo\033[0m] Log Results Finished')
@@ -102,18 +101,19 @@ if __name__ == '__main__':
         if HighY == start_Point[1]:
             HighY = anares[1][-1]
     HighY = Res[2][0][1][-1]
-    funcDF = FunDF(diffF,LowX,HighX,LowY,HighY,20,20)
-    funcDF.generate()
+    if GraphicEnable:
+        funcDF = FunDF(diffF,LowX,HighX,LowY,HighY,20,20)
+        funcDF.generate()
 
-    # Plot Points
-    print("[\033[1;33mInfo\033[0m] Add points to plot")
-    # plt.scatter(Res[0][0][0],Res[0][0][1],color = 'blue', label = 'Euler')
-    # plt.scatter(Res[1][0][0],Res[1][0][1],color = 'red', label = 'OptEuler')
-    plt.scatter(Res[2][0][0],Res[2][0][1],color = 'green', label = 'Rung Kutta')
-    if AnaEnable:
-        plt.scatter(anares[0], anares[1], color ='purple', label ='Analysis')
-    plt.legend(loc = 'best')
-    print("[\033[1;32mInfo\033[0m] Points added to plot")
-    print("[\033[1;33mInfo\033[0m] Generating plot")
-    plt.show()
-    print("[\033[1;32mInfo\033[0m] Plot Generated")
+        # Plot Points
+        print("[\033[1;33mInfo\033[0m] Add points to plot")
+        plt.scatter(Res[0][0][0],Res[0][0][1],color = 'blue', label = 'Euler')
+        plt.scatter(Res[1][0][0],Res[1][0][1],color = 'red', label = 'OptEuler')
+        plt.scatter(Res[2][0][0],Res[2][0][1],color = 'green', label = 'Rung Kutta')
+        if AnaEnable:
+            plt.scatter(anares[0], anares[1], color = 'purple', label ='Analysis')
+        plt.legend(loc = 'best')
+        print("[\033[1;32mInfo\033[0m] Points added to plot")
+        print("[\033[1;33mInfo\033[0m] Generating plot")
+        plt.show()
+        print("[\033[1;32mInfo\033[0m] Plot Generated")

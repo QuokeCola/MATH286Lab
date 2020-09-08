@@ -1,5 +1,6 @@
 import numpy as np
 import multiprocessing
+from processbar import *
 class analytical:
     def __init__(self):
 
@@ -24,11 +25,6 @@ class analytical:
                 self.process_bar(percent, end_str=end_str, total_length=15)
 
         print("\n[\033[1;32mInfo\033[0m] Successfully Compute Analytical Subjects")
-
-    def process_bar(self, percent, start_str='[\033[1;33mProgress\033[0m]|', end_str='', total_length=0):
-        bar = ''.join(['='] * int(percent * total_length)) + ''
-        bar = '\r' + start_str + bar.ljust(total_length) + '| {:0>4.1f}%|'.format(percent * 100) + end_str
-        print(bar, end='', flush=True)
 
     def callbackfunc(self, retval):
         self.y_list.append(retval)
