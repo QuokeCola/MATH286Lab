@@ -365,4 +365,56 @@ During our calculation, we find that the values closed to the asymptotes are mor
 	\includegraphics[scale=0.3]{P1FinalSolution.png}\label{fig:1.4.2.1}
 \end{center}
 
+\section{Problem2}
+
+Determine the maximal solution of the following ODE with the initial value.
+
+\begin{equation}
+	y' = y^3+t \cdot y^3 + t^2 \cdot y + t^3, y(0)=1 \tag{IVP2} \label{IVP2}
+\end{equation}
+
+\subsection{Direction Field}
+
+First First, we draw the direction field of \ref{IVP2}. We can infer from the figure that the solution to problem 2 with initial value $y(0) = 1$ has a right vertical asymptote between 0.4 and 0.6. Besides, it seems that the solution has a left slanted asymptote.
+
+\subsection{Numerical Analysis}
+
+To verify this observation, we first apply the Euler method and Improved Euler Method with different step sizes to approximate the right vertical asymptote at t=0.4 and t=0.5. The results are as follows:
+
+\begin{table}[H]
+	\begin{center}
+		\scriptsize
+		\renewcommand{\arraystretch}{1.2}
+		\begin{tabular}{c|r|r|r|r}
+			\multirow{2}*{\diagbox{h}{t}}&\multicolumn{2}{c|}{0.4}&\multicolumn{2}{c}{0.5}\\
+			\cline{2-5}&Euler&Heun&Euler&Heun\\
+			\hline
+			0.1&1.4769&1.7128&1.8805&2.7722\\
+			0.05&1.8161&2.1699&2.8257&7.02571\\
+			0.01&2.6593&3.0070&756.8174&inf\\
+		\end{tabular}
+			\setlength{\abovecaptionskip}{0.1cm}
+		\setlength{\belowcaptionskip}{-0.9cm}
+		\caption{Euler and Heun Approximation at t = 0.4 \& 0.5 within different steps}\label{tab:tab2.2.1}
+	\end{center}
+\end{table}
+
+The large difference among the computed values at t=0.5 suggests that the right vertical asymptote is lower that 0.5. Therefore, we tried several times to narrow down the interval and use the more accurate method Runge-Kutta method with fourth-order four-stage to approximate the value of the solution at $t=0.439$ and $t=0.440$.
+
+\begin{table}[H]
+	\begin{center}
+		\scriptsize
+		\renewcommand{\arraystretch}{1.2}
+		\begin{tabular}{l|l|l}
+			step h  & t=0.439 & t=0.440  \\
+			\hline
+			0.0005  & 18.7523 & 35.1483  \\
+			\hline
+			0.0001  & 22.2170 & 249.3580 \\
+			\hline
+			0.00001 & 23.2974 & inf     
+		\end{tabular}
+	\end{center}
+\end{table}
+
 \end{document}
