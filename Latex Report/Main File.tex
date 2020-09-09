@@ -1,22 +1,22 @@
 \documentclass[11pt,a4paper]{article}
+\usepackage{authblk}
+\usepackage{amsmath}
 \usepackage{booktabs}
 \usepackage{caption}  
 \usepackage{changepage}
+\usepackage{diagbox}
+\usepackage{float}
+\usepackage[T1]{fontenc}
 \usepackage{geometry}
+\usepackage[utf8]{inputenc}
  \usepackage{pgfplots}
  \usepgfplotslibrary{dateplot}
-\usepackage{diagbox}
-\usepackage{tcolorbox}
-\usepackage{xpinyin}
-\usepackage{subfigure}
-\usepackage{float}
 \usepackage{multicol}
 \usepackage{multirow}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{authblk}
+\usepackage{subfigure}
+\usepackage{tcolorbox}
 \usepackage{threeparttable}
-\usepackage{amsmath}
+\usepackage{xpinyin}
 
 \geometry{top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm}
 
@@ -31,6 +31,7 @@
 \renewcommand\Authands{ and }
 
 \begin{document}
+\setlength{\parindent}{0pt}
 \maketitle
 
 \section{Problem 1}
@@ -73,7 +74,7 @@ At first, we plot the direction field of (1). After connecting the direction arr
 \end{table}
 
 \subsubsection{Approximation}
-\noindent We apply three methods all together with a step of $h = 0.1$ obtain the table below:
+We apply three methods all together with a step of $h = 0.1$ obtain the table below:
 \begin{table}[H]
 	\begin{center}
 		\scriptsize
@@ -193,7 +194,7 @@ In our code we could modify the number of terms based on the accuracy we need. <
 	
 	~\\
 	
-	\noindent Note that, on $0\leq t \leq 1$,
+	Note that, on $0\leq t \leq 1$,
 
 	\begin{center}
 		$y'=y^2+t \cdot y+t^2 \geq t \cdot y$
@@ -201,46 +202,46 @@ In our code we could modify the number of terms based on the accuracy we need. <
 		therefore $y \geq e^{\frac{t^2}{2}}>0$
 	\end{center}
 
-	\noindent Note that we have ensure that the vertical asymptote locates in the interval $0.8\leq t \leq 0.9$ from the direction field. Based on this, we could have a further squeeze formula: 
+	Note that we have ensure that the vertical asymptote locates in the interval $0.8\leq t \leq 0.9$ from the direction field. Based on this, we could have a further squeeze formula: 
 	\begin{center}
 		$y^2+0.8 \cdot y+0.8^2 \leq y' = y^2+t \cdot y+t^2 \leq y^2+0.9 \cdot y+0.9^2$
 	\end{center}
-	\noindent Therefore, we could get the lower bound and upper bound of vertical asymptote. Considering $y_1'=y_1^2+0.9 \cdot y_1+0.9^2$ first:
+	Therefore, we could get the lower bound and upper bound of vertical asymptote. Considering $y_1'=y_1^2+0.9 \cdot y_1+0.9^2$ first:
 
-	\noindent We are able to obtain th solution:
+	We are able to obtain th solution:
 	\begin{center}
 		$y_1=0.45 \cdot (\sqrt3tan(0.45 \cdot (100 \cdot sqrt3 \cdot C_1+\sqrt{3} \cdot t))-1)$
 	\end{center}
-	\noindent Instead of using the initial value $y(0)=1$, we use $y(0.8)=16.56526818$ which is obtained by power series to get a more accurate approximation of the vertical asymptote. Then we obtain: 
+	Instead of using the initial value $y(0)=1$, we use $y(0.8)=16.56526818$ which is obtained by power series to get a more accurate approximation of the vertical asymptote. Then we obtain: 
 	\begin{center}
 		$C_1=0.0115662936$.
 	\end{center}
-	\noindent We are interested in the points when $y_1 \rightarrow \infty$:
+	We are interested in the points when $y_1 \rightarrow \infty$:
 	\begin{center}
 		Let $0.45 \cdot (100 \cdot \sqrt3 \cdot C_1+\sqrt3 \cdot t)=\frac{\pi}{2}$ 
 		
 		$\Rightarrow t_1 = 0.85873$
 	\end{center}
 
-	\noindent We could calculate in the same method on $y_2^2+0.8 \cdot y_2+0.8^2$ and obtained the solution:
+	We could calculate in the same method on $y_2^2+0.8 \cdot y_2+0.8^2$ and obtained the solution:
 
 	\begin{center}
 		$y_2=0.4 \cdot (\sqrt{3} \cdot tan(0.4 \cdot (24 \cdot \sqrt{3} \cdot C_2+\sqrt{3} \cdot t))-1)$
 	\end{center}
 
-	\noindent Apply the initial value $y(0.8) = 16.56526818$, we get 
+	Apply the initial value $y(0.8) = 16.56526818$, we get 
 
 	\begin{center}
 		$C_2=0.056333519$
 	\end{center}
 
-	\noindent When $y_2 \rightarrow \infty$, we finally get $t_2=0.85891$
+	When $y_2 \rightarrow \infty$, we finally get $t_2=0.85891$
 
-	\noindent Therefore, we conclude that the vertical asymptote on the right is within the interval:
+	Therefore, we conclude that the vertical asymptote on the right is within the interval:
 	\begin{center}
 		$0.85873 \leq t \leq 0.85891$,
 	\end{center}
-	\noindent Which agrees with our results in numerical method well.
+	 Which agrees with our results in numerical method well.
 
 	\vfill\null
 	\columnbreak
@@ -249,40 +250,40 @@ In our code we could modify the number of terms based on the accuracy we need. <
 
 	~\\
 	
-	\noindent Note that, on $t \leq 0$,
+	Note that, on $t \leq 0$,
 
 	\begin{center}
 		$y'=y^2+t \cdot y+t^2 \geq t \cdot y$
 
 		therefore $y \leq -e^{-\frac{t^2}{2}} \leq 0$
 	\end{center}
-	\noindent Which indicates that $y' > 0$ when $t \leq 0$, so we could conclude that $y$ behaves monotonic increasing when $t \leq 0$. Therefore $y < 0$ when $t \leq 0$.
+	Which indicates that $y' > 0$ when $t \leq 0$, so we could conclude that $y$ behaves monotonic increasing when $t \leq 0$. Therefore $y < 0$ when $t \leq 0$.
 
-	\noindent Note that we have ensure that the vertical asymptote locates in the interval $-2.5 \leq t \leq -2$ from the direction field. Consider function $\varphi(t,y) = t \cdot y+t^2$, seeing $y$ as a constant coefficient. The axi of symmetry of the function locate $t=-\frac{y}{2}$, seeing $y$ as a constant coefficient. The axis of symmetry of the function locate $t= - \frac{y}{2}$, remembering $y<0$ when $t \leq 0$
+	Note that we have ensure that the vertical asymptote locates in the interval $-2.5 \leq t \leq -2$ from the direction field. Consider function $\varphi(t,y) = t \cdot y+t^2$, seeing $y$ as a constant coefficient. The axi of symmetry of the function locate $t=-\frac{y}{2}$, seeing $y$ as a constant coefficient. The axis of symmetry of the function locate $t= - \frac{y}{2}$, remembering $y<0$ when $t \leq 0$
 
-	\noindent Based on this, we could have a further squeeze formula when $-2.5 \leq t \leq -2$
+	Based on this, we could have a further squeeze formula when $-2.5 \leq t \leq -2$
 
 	\begin{center}
 		$y^2-2 \cdot y+(-2)^2 \leq y' = y^2 + t \cdot y + t^2 \leq y^2 - 2.5 \cdot y + (-2.5)^2$
 	\end{center}
 
-	\noindent Therefore, we could get the lower bound and upper bound of vertical asymptote.
+	Therefore, we could get the lower bound and upper bound of vertical asymptote.
 
-	\noindent Considering $y_1'=y_1^2-2 \cdot y_1+(-2)^2$ first:
+	Considering $y_1'=y_1^2-2 \cdot y_1+(-2)^2$ first:
 
-	\noindent We are able to obtain the solution: 
+	We are able to obtain the solution: 
 	
 	\begin{center}
 		$y_1=\sqrt{3}tan({\sqrt{3} \cdot C_1+\sqrt{3} \cdot t})+1$
 	\end{center}
 
-	\noindent Instead of using the initial value $y(0)=1$ , we use $y(-2)=-7.1421908$ which is obtained by Runge-kutta to get a more accurate approximation of the vertical asymptote. Then we obtain: 
+	Instead of using the initial value $y(0)=1$ , we use $y(-2)=-7.1421908$ which is obtained by Runge-kutta to get a more accurate approximation of the vertical asymptote. Then we obtain: 
 	
 	\begin{center}
 		$C_1=1.214113538$
 	\end{center}
 
-	\noindent We are interested in the points when $y_1 \rightarrow -\infty$:
+	We are interested in the points when $y_1 \rightarrow -\infty$:
 
 	\begin{center}
 		Let $\sqrt{3} \cdot C_1+\sqrt{3} \cdot t=\frac{\pi}{2}$
@@ -290,26 +291,26 @@ In our code we could modify the number of terms based on the accuracy we need. <
 		$\Rightarrow t_1 = 2.1210$
 	\end{center}
 
-	\noindent We could calculate in the same method on $y_2' = y_2 ^ 2-2.5 \cdot y_2+(-2.5)^2$ and obtain the solution:
+	We could calculate in the same method on $y_2' = y_2 ^ 2-2.5 \cdot y_2+(-2.5)^2$ and obtain the solution:
 
 	\begin{center}
 		$y_2=\frac{5}{4} \cdot (\sqrt{3} \cdot tan(\frac{5}{4} \cdot (4 \cdot \sqrt{3} \cdot C_2+\sqrt{3} \cdot t))+1)$
 	\end{center}
 
-	\noindent Apply the initial value $y(-2) = -7.1421908$, we get 
+	 Apply the initial value $y(-2) = -7.1421908$, we get 
 	\begin{center}
 		$C_2 = 0.3477739645$
 	\end{center}
 
-	\noindent When $y_2 \rightarrow -\infty$, we finally get $t_2=-2.1166$
+	When $y_2 \rightarrow -\infty$, we finally get $t_2=-2.1166$
 
-	\noindent Therefore, we conclude that the vertical asymptote on the right is within the interval:
+	Therefore, we conclude that the vertical asymptote on the right is within the interval:
 
 	\begin{center}
 		$-2.1210 \leq t \leq -2.1166$
 	\end{center}
 
-	\noindent Which conforms our result in numerical approximation well.
+	Which conforms our result in numerical approximation well.
 
 \end{multicols}
 
@@ -349,8 +350,7 @@ In this problem we try to solve the IVP $y'=y^2+t \cdot y+t^2, y(0)=1$ with thre
 		\small
 		\begin{tabular}{c|c|c}
 			\renewcommand{\multirowsetup}{\centering}
-			Euler			&Heun			&Runge Kutta	\\
-			\hline
+			Euler			&Heun			&Runge Kutta	\\ \hline
 			8.82 sec		&18.71 sec		&41.04 sec		\\
 		\end{tabular}
 		\setlength{\abovecaptionskip}{0.1cm}
@@ -362,7 +362,21 @@ In this problem we try to solve the IVP $y'=y^2+t \cdot y+t^2, y(0)=1$ with thre
 During our calculation, we find that the values closed to the asymptotes are more than tricky. Therefore, to determine the more accurate locations of asymptotes and verify our numerical methods, squeeze rule has been used. Figure \ref{fig:1.4.2.1} is the plot based on Runge-Kutta method with step size 0.0000001.
 
 \begin{center}
-	\includegraphics[scale=0.3]{P1FinalSolution.png}\label{fig:1.4.2.1}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}[b]{0.4\textwidth}
+			\centering
+			\includegraphics[width=0.5\textwidth]{P1FinalSolution.png}
+			\caption{RK with h=0.0000001}
+			\label{fig:1.4.2.1}
+		\end{minipage}
+		\begin{minipage}[b]{0.4\textwidth}
+			\centering
+			\includegraphics[width=0.5\textwidth]{Problem2HandSketch.jpeg}
+			\caption{Hand-drawn Curve of Problem2}
+			\label{fig:2.0.1}
+		\end{minipage}
+	\end{figure}
 \end{center}
 
 \section{Problem2}
@@ -375,9 +389,20 @@ Determine the maximal solution of the following ODE with the initial value.
 
 \subsection{Direction Field}
 
-First First, we draw the direction field of \ref{IVP2}. We can infer from the figure that the solution to problem 2 with initial value $y(0) = 1$ has a right vertical asymptote between 0.4 and 0.6. Besides, it seems that the solution has a left slanted asymptote.
+First First, we draw the direction field of \ref{IVP2}. We can infer from the figure that the solution to problem 2 with initial value $y(0) = 1$ has a right vertical asymptote between 0.4 and 0.5. Besides, it seems that the solution has a left slanted asymptote.
 
 \subsection{Numerical Analysis}
+
+We use Runge-Kutta Method with step $h=0.01$ to checkout that the graph we draw is roughly right.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l|l|l|l|l|l|l|l}
+		step h & t=-10 & t=-5  & t=-1  & t=-0.5 & t=0 & t=0.2 & t=0.4 \\
+		\hline
+		0.01   & 9.985 & 4.970 & 0.771 & 0.756  & 1   & 1.307 & 3.019
+	\end{tabular}
+\end{table}
 
 To verify this observation, we first apply the Euler method and Improved Euler Method with different step sizes to approximate the right vertical asymptote at t=0.4 and t=0.5. The results are as follows:
 
@@ -416,5 +441,109 @@ The large difference among the computed values at t=0.5 suggests that the right 
 		\end{tabular}
 	\end{center}
 \end{table}
+
+The value at $t=0.439$ is reasonable and we might well believe that the solution has a value of about 23.2974 at $t=0.439$. On the contrary, the explosion at $t=0.440$ indicates that there is a vertical asymptote between $t=0.439$ and $0.440$. 
+
+We continue our numerical process by choosing a smaller step size of $h=0.000001$ we get the following results: 
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l|l|l|l|l}
+	t & 0.439897 & 0.439898 & 0.439899 & 0.439900 \\
+	\hline
+	y & 371.3488 & 554.8201 & 831.5077 & Inf
+	\end{tabular}
+\end{table}
+
+There is an abrupt increase of y at $t=0.439900$. Therefore, we obtain the vertical asymptote with the accuracy of 6 digits. If a more accurate approximation is needed, we can further reduce the step size to the desired number of digits. 
+
+To handle with the left slanted asymptote we also use Runge-Kutta method to calculate. By the data we predict the left slanted asymptote is $y=-t$ because the error is decreasing while t is increasing.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l|l|l|l|l|l|l}
+		step h          & t=-0.5 & t=-1   & t=-5   & t=-10  & t=-50   & t=-100  \\ \hline
+		0.0001          & 0.7543 & 0.7747 & 4.9797 & 9.9949 & 49.9996 & 99.9998 \\ \hline
+		error with y=-x & 0.2543 & 0.2253 & 0.0203 & 0.0051 & 0.0004  & 0.00002
+	\end{tabular}
+\end{table}
+
+\subsection{Analytical Method-Further Approximation}
+
+Note that, on $0 \leq t \leq 1$, $y > 0$. We have ensured that the vertical asymptote locates in the interval $0.4 \leq t \leq 0.5$ from the direction field. Based on this, we could have a further squeeze formula: 
+
+\begin{center}
+	$y^3+0.4 \cdot y^2 + 0.4^2 \cdot y + 0.4^3 \leq y' = y^2+t \cdot y + t^2 \leq y^3 + 0. \cdot y^2 + 0.5^2 \cdot y + 0.5^3$
+\end{center}
+
+Therefore, we could get the lower bound and upper bound of vertical asymptote. 
+
+Considering $_1'=y_1^3+0.5 \cdot y_1^2 + 0.5^2 \cdot y_1 + 0.5^3$ first:
+
+We are able to obtain the implicit solution:
+
+\begin{center}
+	$C_1+\frac{1}{8} \cdot t_1 = \frac{1}{4} \cdot ln(2 \cdot y_1+1)- \frac{1}{8}\cdot ln(4\cdot y_1^2+1)+\frac{1}{4}\cdot tan^{-1}(2 \cdot y_1)$
+\end{center}
+
+Instead of using the initial value $y(0)=1$, we use $y(0.4)=3,39244$ which is obtained by Runge-Kutta, the most accurate approximation method concluded from Problem1, to get a more accurate approximation of the vertical asymptote. Then we obtain: $C_1=0.3378012449$.
+
+We are interested in the points that $y_1 \rightarrow \infty$:
+
+Considering $\frac{1}{4} \cdot ln(2 \cdot y_1 + 1)-\frac{1}{8}\cdot ln(4 \cdot y_1^2+1)$ part only:
+
+\begin{center}
+	$\frac{1}{4} \cdot ln(2\cdot y_1 + 1)- \frac{1}{8}\cdot ln(4\cdot y_1^2+1) = \frac{1}{8}(ln(\frac{(2\cdot y_1+1)^2}{4\cdot y_1^2+1}))=\frac{1}{8}\cdot ln(1+\frac{4}{4\cdot y_1+\frac{1}{y_1}})$
+\end{center}
+
+When $y_1 \rightarrow \infty$, $\frac{4}{4\cdot y_1+\frac{1}{y_1}}\rightarrow 0$, therefore $\frac{1}{4} \cdot ln(2 \cdot y_1 + 1)-\frac{1}{8}\cdot ln(4\cdot y_1^2+1) \rightarrow 0$.
+
+Which indicates that we only need consider the part remained: $\frac{1}{4} \cdot tan^{-1}(2\cdot y_1)$
+
+When $y_1 \rightarrow \infty$, $C_1+ \frac{1}{8}\cdot t_1 = \frac{1}{4} \cdot \frac{\pi}{2}, \Rightarrow t_1 = 0.43918$
+
+We could apply the same method on $y_2' = y_2^3 + 0.4 \cdot y_2^2 + 0.4^2 \cdot y_2 + 0.4 ^3$:
+
+The implicit solution obtained:
+
+\begin{center}
+	$C_2 + \frac{1}{125}\cdot t_2 = \frac{1}{40}\cdot ln(5\cdot y_2 + 2)- \frac{1}{80}ln((5\cdot y_2+2)^2 - 4\cdot(5\cdot y_2 + 2)+8)+ \frac{1}{40}\cdot tan^(-1)(\frac{5}{2}\cdot y_2)$
+\end{center}
+
+Apply the initial value $y(0.4)=3,39244$, we get $C_2=0.03574964408$
+
+When $y_2 \rightarrow \infty$, we finally get $t_2=0.44003$
+
+Therefore we conclude that the vertical asymptote on the right is within the interval 
+
+\begin{center}
+	$0.43918 \leq t \leq 0.44003$, 
+\end{center}
+
+Which agrees our results in numerical approximation well.
+
+\subsection{Conclusion}
+
+\subsubsection{Error Analysis}
+
+After collecting all data together, we observed that when step size , the values calculated by three methods are getting closer and closer. Notice that when step size is 0.000001, the values calculated by three methods all tend to be 3.3924. Therefore, to get a better method for this problem, we set it as the standard value at $t = 0.4$ and compare which method can get closer to it with less time. It turns out that Improved Euler and Runge Kutta method perform better than Euler Method. Below is the result:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+		Step Size & Euler  & Improved Euler & Runge-Kutta & Standard Value \\ \hline
+		0.1       & 1.4769 & 1.7128         & 1.7590      & 3.3924         \\ \hline
+		0.05      & 1.8161 & 2.1699         & 2.2178      & 3.3924         \\ \hline
+		0.01      & 2.6593 & 3.0070         & 3.0191      & 3.3924         \\ \hline
+		0.001     & 3.2791 & 3.3488         & 3.3490      & 3.3924         \\ \hline
+		0.0001    & 3.3804 & 3.3880         & 3.3880      & 3.3924        
+	\end{tabular}
+\end{table}
+
+\subsubsection{Conclusion}
+
+In this problem, we try to solve the IVP with numerical method. Euler Method, Improved Euler method and Runge-Kutta Method have been used as numerical approaches with different step size. We observe that when step size become smaller and smaller, the values calculated by three methods are getting closer and closer. Therefore, to determine a better method for this problem, we have set a standard value and compare by which method the values can get closer to the standard value with larger step size. 
+From the graph and the data, we observe that the right side of IVP2 has a vertical asymptote. By squeeze rule, we get that the right side asymptote is between 0.43918 and 0.44033, which agrees with our numerical method well. As for the left side, we observe that when “t” is far less than zero, the graph is approaching to the line but always below it and it has been proved by analytical method. 
+Below is the plot based on Runge-Kutta method with step size 0.00001. 
 
 \end{document}
