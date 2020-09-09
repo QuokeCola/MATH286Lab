@@ -464,69 +464,183 @@ To handle with the left slanted asymptote we also use Runge-Kutta method to calc
 	\begin{tabular}{l|l|l|l|l|l|l}
 		step h          & t=-0.5 & t=-1   & t=-5   & t=-10  & t=-50   & t=-100  \\ \hline
 		0.0001          & 0.7543 & 0.7747 & 4.9797 & 9.9949 & 49.9996 & 99.9998 \\ \hline
-		error with y=-x & 0.2543 & 0.2253 & 0.0203 & 0.0051 & 0.0004  & 0.00002
+		error with y=-x & 0.2543 & 0.2253 & 0.0203 & 0.0051 & 0.0004  & 0.00002 
 	\end{tabular}
 \end{table}
 
 \subsection{Analytical Method-Further Approximation}
+\begin{multicols}{2}
+	\small
+	\paragraph{\small Vertical Asymptote on the Right}
+	
+	~\\
+	
+	Note that, on $0 \leq t \leq 1$, $y > 0$. We have ensured that the vertical asymptote locates in the interval $0.4 \leq t \leq 0.5$ from the direction field. Based on this, we could have a further squeeze formula: 
+	
+	\begin{center}
+		$y^3+0.4 \cdot y^2 + 0.4^2 \cdot y + 0.4^3 \leq y' = y^2+t \cdot y + t^2 \leq y^3 + 0. \cdot y^2 + 0.5^2 \cdot y + 0.5^3$
+	\end{center}
+	
+	Therefore, we could get the lower bound and upper bound of vertical asymptote. 
+	
+	Considering $_1'=y_1^3+0.5 \cdot y_1^2 + 0.5^2 \cdot y_1 + 0.5^3$ first:
+	
+	We are able to obtain the implicit solution:
+	
+	\begin{center}
+		$C_1+\frac{1}{8} \cdot t_1 = \frac{1}{4} \cdot ln(2 \cdot y_1+1)- \frac{1}{8}\cdot ln(4\cdot y_1^2+1)+\frac{1}{4}\cdot tan^{-1}(2 \cdot y_1)$
+	\end{center}
+	
+	Instead of using the initial value $y(0)=1$, we use $y(0.4)=3,39244$ which is obtained by Runge-Kutta, the most accurate approximation method concluded from Problem1, to get a more accurate approximation of the vertical asymptote. Then we obtain: $C_1=0.3378012449$.
+	
+	We are interested in the points that $y_1 \rightarrow \infty$:
+	
+	Considering $\frac{1}{4} \cdot ln(2 \cdot y_1 + 1)-\frac{1}{8}\cdot ln(4 \cdot y_1^2+1)$ part only:
+	
+	\begin{center}
+		$\frac{1}{4} \cdot ln(2\cdot y_1 + 1)- \frac{1}{8}\cdot ln(4\cdot y_1^2+1) = \frac{1}{8}(ln(\frac{(2\cdot y_1+1)^2}{4\cdot y_1^2+1}))=\frac{1}{8}\cdot ln(1+\frac{4}{4\cdot y_1+\frac{1}{y_1}})$
+	\end{center}
+	
+	When $y_1 \rightarrow \infty$, $\frac{4}{4\cdot y_1+\frac{1}{y_1}}\rightarrow 0$, therefore $\frac{1}{4} \cdot ln(2 \cdot y_1 + 1)-\frac{1}{8}\cdot ln(4\cdot y_1^2+1) \rightarrow 0$.
+	
+	Which indicates that we only need consider the part remained: $\frac{1}{4} \cdot tan^{-1}(2\cdot y_1)$
+	
+	When $y_1 \rightarrow \infty$, $C_1+ \frac{1}{8}\cdot t_1 = \frac{1}{4} \cdot \frac{\pi}{2}, \Rightarrow t_1 = 0.43918$
+	
+	We could apply the same method on $y_2' = y_2^3 + 0.4 \cdot y_2^2 + 0.4^2 \cdot y_2 + 0.4 ^3$:
+	
+	The implicit solution obtained:
+	
+	\begin{center}
+		$C_2 + \frac{1}{125}\cdot t_2 = \frac{1}{40}\cdot ln(5\cdot y_2 + 2)- \frac{1}{80}ln((5\cdot y_2+2)^2 - 4\cdot(5\cdot y_2 + 2)+8)+ \frac{1}{40}\cdot tan^{-1}(\frac{5}{2}\cdot y_2)$
+	\end{center}
+	
+	Apply the initial value $y(0.4)=3,39244$, we get $C_2=0.03574964408$
+	
+	When $y_2 \rightarrow \infty$, we finally get $t_2=0.44003$
+	
+	Therefore we conclude that the vertical asymptote on the right is within the interval 
+	
+	\begin{center}
+		$0.43918 \leq t \leq 0.44003$, 
+	\end{center}
+	
+	Which agrees our results in numerical approximation well.
+	
+	\paragraph{\small The Asymptote on the Left}
+	
+	~\\
+	
+	After the factorization we could get
+	\begin{center}
+		\begin{equation}
+			y'=(y+t)\cdot (y^2 + t^2) \tag{Equ 2.3.2.1} \label{Equ.2.3.2.1}
+		\end{equation}
+	\end{center}
 
-Note that, on $0 \leq t \leq 1$, $y > 0$. We have ensured that the vertical asymptote locates in the interval $0.4 \leq t \leq 0.5$ from the direction field. Based on this, we could have a further squeeze formula: 
+	From \ref{Equ.2.3.2.1}, we could conclude that the sign of $y'$ depends on $(y+t)$
+	
+	\textbf{Here we will prove that the function $y(t)$ will cross the line y+t=0 first:}
+	
+	When $t<0$, the ODE starts from the initial point $y(0)=1$. When $t=0, y=1, y'=1>0$.
+	
+	Therefore, $y$ decreases when $t$ decreases. When $y+t$ reaches 0. $y'$ turns to be 0. At the point $(t_0, y_0)$ which satisfies $y+t=0$,if the horizontal axis of the point decreases $\Delta t$ ($\Delta t>0$ and $\Delta t$ is infinitesimal), the vertical axis of the point remains because $y' = 0$. For the new point $(t_1+ \Delta t, y_1)$, on the right of point $(t_1, y_1)$, shuld always be under the line $y+t=0$, which means that $t_1$+$\Delta t + y_1 < 0$. So, there is a contradiction when deciding the sign of the sum $t_1+\Delta t+y_1$ of the point $(t_1+\Delta t, y_1)$. Therefore, the point $(t_1, y_1)$ does not exist. Therefore, function $y(t)$ would not cross the line $y+t=0$ anymore.
+	
+	\textbf{So, we could conclude that $y+t<0$ when $t<t_0$, where $t_0 \approx -0.729$. And $y>0$ when $t<0$.}
+	
+	\textbf{Next we will prove that function $y(t)$ should have an asymptotic line when $t \rightarrow -\infty$:}
+	
+	Let's still focusing on the equation:
+	
+	\begin{equation}
+		y'=(y+t)\cdot(y^2+t^2) \label{Equ 2.3.2.1}
+	\end{equation}
+	
+	\subparagraph{1.} When $-1<y'<0:$
+	
+	\begin{center}
+		$-1<(t+y)(y^2+t^2)<0$
+		
+		$y+t>\frac{1}{y^2+t^2}\geq -\frac{2}{(y+t)^2}$
+		
+		$y+t>\sqrt[3]{-2}$
+		
+	\end{center}
+	let $\varphi(t)=y+t$, from above we could conclude that $\sqrt[3]{-2} < \varphi(t)<0$, which is well bounded.
+	
+	Consider y'':
+	
+	\begin{center}
+		$y' = y^3+t\cdot y^2+t^2\cdot y+t^3$
+		
+		$y''=y'\cdot (3\cdot y^2+2\cdot y\cdot t+t^2)+y^2+2\cdot y\cdot t + 3\cdot t^2$
+		
+		$3\cdot y^2+2\cdot y \cdot t + t^2=2\cdot y^2+(y+t)^2>0$
+	\end{center}
 
-\begin{center}
-	$y^3+0.4 \cdot y^2 + 0.4^2 \cdot y + 0.4^3 \leq y' = y^2+t \cdot y + t^2 \leq y^3 + 0. \cdot y^2 + 0.5^2 \cdot y + 0.5^3$
-\end{center}
+	Substitute $y'>-1$ we get
+	
+	\begin{center}
+		$y''> -(3\cdot y^2+2\cdot y \cdot t + t^2)+y^2+2\cdot y \cdot t + 3\cdot t^2 = 2 \cdot (t+y)\cdot (t-y)>0$
+	\end{center}
 
-Therefore, we could get the lower bound and upper bound of vertical asymptote. 
+	Therefore, when $-1<y'<0, y'' > 0$. When $t$ decreases, $y'$ would decreases. 
+	
+	There would be a point $(t^*, y^*)$ satisfies $y'=-1$, where $\varphi(t)'=y'+1=0$. Consider the point near it as $(t^*-\Delta, y^*+\Delta)$. After calculation in python, we could obtain $t^* \approx -1.367$.
+	
+	Substitude it into $y'=(y+t)\cdot(t^2+t^2)$, we could find point $(t^*-\Delta, y^*+\Delta)$ has a smaller $y'$.
+	
+	So, we could have the following discussion:
+	
+	\subparagraph{2.} When $y' < 1$:
+	
+	Consider function $\varphi(t)=y+t, \varphi(t)<0, \varphi(t)'=y'+1<0, t<t^*$.
+	Function $\varphi(t)$ on the domain $t<t^*$ is upper bounded and monotonic decreasing. Therefore, we could conclude $\varphi(t)$ has a limit when $t \rightarrow -\infty$ and assuming is m.
+	Which is when $t \rightarrow -\infty, y+t=m$
+	
+	From which we could conclude that function y(t) have an asymptotic line when $t\rightarrow -\infty$, which is $y+t=m$.
+	
+	\textbf{Finally we proved that the function $y(t)$ have an asymptotic line is $t+y=0$ when $t\rightarrow -\infty.$ Consider $y''$}
+	
+	\begin{center}
+		$y''=y'\cdot(3\cdot y^2+2\cdot y \cdot t+t^2)+y^2+2\cdot y \cdot t + 3\cdot t^2$
+	\end{center}
+	
+	Because function $y(t)$ have an asymptotic line, so $y''=0$ when $t\rightarrow -\infty$.
+	
+	So we could obtain:
+	
+	\begin{equation}
+		y' = -\frac{y^2+2\cdot y \cdot t + 3\cdot t^2}{3\cdot y^2+2\cdot y \cdot t + t^2} \tag{Equ 2.3.2.2} \label{Equ. 2.3.2.2}
+	\end{equation}
 
-Considering $_1'=y_1^3+0.5 \cdot y_1^2 + 0.5^2 \cdot y_1 + 0.5^3$ first:
+	Let $\frac{y}{t}=K$, substitute it into \ref{Equ. 2.3.2.2} we could get:
+	
+	\begin{center}
+		$y' = -\frac{K^2+2\cdot K+3}{3\cdot K^2+ 2\cdot K +1}$
+	\end{center}
+	
+	From which we could see that the value of $y'$ simply depends on the value of $K$.
+	
+	Remember that $y(t)$ has an asymptotic line in the form of $y+t=m$, so $y'=-1$.
+	
+	Solving the equation $-\frac{K^2+2\cdot K+3}{3\cdot K^2+ 2\cdot K +1}=-1$, we could get $K=-1$, which means 
+	
+	\begin{center}
+		$\frac{y}{t}=-1$ when $t\rightarrow -\infty$.
+	\end{center}
 
-We are able to obtain the implicit solution:
+	Therefore, function $y(t)$'s asymptotic line is $y+t=0$ when $t \rightarrow -\infty$.
+	
+\end{multicols}
 
-\begin{center}
-	$C_1+\frac{1}{8} \cdot t_1 = \frac{1}{4} \cdot ln(2 \cdot y_1+1)- \frac{1}{8}\cdot ln(4\cdot y_1^2+1)+\frac{1}{4}\cdot tan^{-1}(2 \cdot y_1)$
-\end{center}
 
-Instead of using the initial value $y(0)=1$, we use $y(0.4)=3,39244$ which is obtained by Runge-Kutta, the most accurate approximation method concluded from Problem1, to get a more accurate approximation of the vertical asymptote. Then we obtain: $C_1=0.3378012449$.
-
-We are interested in the points that $y_1 \rightarrow \infty$:
-
-Considering $\frac{1}{4} \cdot ln(2 \cdot y_1 + 1)-\frac{1}{8}\cdot ln(4 \cdot y_1^2+1)$ part only:
-
-\begin{center}
-	$\frac{1}{4} \cdot ln(2\cdot y_1 + 1)- \frac{1}{8}\cdot ln(4\cdot y_1^2+1) = \frac{1}{8}(ln(\frac{(2\cdot y_1+1)^2}{4\cdot y_1^2+1}))=\frac{1}{8}\cdot ln(1+\frac{4}{4\cdot y_1+\frac{1}{y_1}})$
-\end{center}
-
-When $y_1 \rightarrow \infty$, $\frac{4}{4\cdot y_1+\frac{1}{y_1}}\rightarrow 0$, therefore $\frac{1}{4} \cdot ln(2 \cdot y_1 + 1)-\frac{1}{8}\cdot ln(4\cdot y_1^2+1) \rightarrow 0$.
-
-Which indicates that we only need consider the part remained: $\frac{1}{4} \cdot tan^{-1}(2\cdot y_1)$
-
-When $y_1 \rightarrow \infty$, $C_1+ \frac{1}{8}\cdot t_1 = \frac{1}{4} \cdot \frac{\pi}{2}, \Rightarrow t_1 = 0.43918$
-
-We could apply the same method on $y_2' = y_2^3 + 0.4 \cdot y_2^2 + 0.4^2 \cdot y_2 + 0.4 ^3$:
-
-The implicit solution obtained:
-
-\begin{center}
-	$C_2 + \frac{1}{125}\cdot t_2 = \frac{1}{40}\cdot ln(5\cdot y_2 + 2)- \frac{1}{80}ln((5\cdot y_2+2)^2 - 4\cdot(5\cdot y_2 + 2)+8)+ \frac{1}{40}\cdot tan^(-1)(\frac{5}{2}\cdot y_2)$
-\end{center}
-
-Apply the initial value $y(0.4)=3,39244$, we get $C_2=0.03574964408$
-
-When $y_2 \rightarrow \infty$, we finally get $t_2=0.44003$
-
-Therefore we conclude that the vertical asymptote on the right is within the interval 
-
-\begin{center}
-	$0.43918 \leq t \leq 0.44003$, 
-\end{center}
-
-Which agrees our results in numerical approximation well.
 
 \subsection{Conclusion}
 
 \subsubsection{Error Analysis}
 
-After collecting all data together, we observed that when step size , the values calculated by three methods are getting closer and closer. Notice that when step size is 0.000001, the values calculated by three methods all tend to be 3.3924. Therefore, to get a better method for this problem, we set it as the standard value at $t = 0.4$ and compare which method can get closer to it with less time. It turns out that Improved Euler and Runge Kutta method perform better than Euler Method. Below is the result:
+After collecting all data together, we observed that while step size is getting smaller, the values calculated by three methods are getting closer. Notice that when step size is 0.000001, the values calculated by three methods all tend to be 3.3924. Therefore, to get a better method for this problem, we set it as the standard value at $t = 0.4$ and compare which method can get closer to it with less time. It turns out that Improved Euler and Runge Kutta method perform better than Euler Method. Below is the result:
 
 \begin{table}[H]
 	\centering
@@ -542,8 +656,8 @@ After collecting all data together, we observed that when step size , the values
 
 \subsubsection{Conclusion}
 
-In this problem, we try to solve the IVP with numerical method. Euler Method, Improved Euler method and Runge-Kutta Method have been used as numerical approaches with different step size. We observe that when step size become smaller and smaller, the values calculated by three methods are getting closer and closer. Therefore, to determine a better method for this problem, we have set a standard value and compare by which method the values can get closer to the standard value with larger step size. 
-From the graph and the data, we observe that the right side of IVP2 has a vertical asymptote. By squeeze rule, we get that the right side asymptote is between 0.43918 and 0.44033, which agrees with our numerical method well. As for the left side, we observe that when “t” is far less than zero, the graph is approaching to the line but always below it and it has been proved by analytical method. 
+In this problem, we try to solve the IVP with different numerical methods. Euler Method, Improved Euler method and Runge-Kutta Method have been used as numerical approaches with different step size. We observe that when we decreased the step sizes, the values calculated by three methods converges to a same value. Therefore, to determine a better method for this problem, we have set a standard value and compare by which method the values can get closer to the standard value with larger step size. 
+From the graph and the data, we observe that the right side of IVP2 has a vertical asymptote. By applying squeeze rule, we get that the right side asymptote is between 0.43918 and 0.44033, which agrees with our numerical method well. As for the left side, we observe that when $t$ is far less than zero, the graph is approaching to the line but always below it and it has been proved by analytical method. 
 Below is the plot based on Runge-Kutta method with step size 0.00001. 
 
 \end{document}
