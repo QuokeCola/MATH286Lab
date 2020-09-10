@@ -1,5 +1,4 @@
 from __future__ import division
-import multiprocessing
 import sys
 
 import warnings
@@ -17,11 +16,11 @@ import time
 sys.setrecursionlimit(100000)
 
 start_Point = (0, 1)
-Step = 0.0000001
-HigherScale = 0.8
-LowerScale = -2.1
+Step = 0.001
+HigherScale = 0.43
+LowerScale = -5
 
-AnaEnable = False
+Prob1AnalyticalEnable = False
 GraphicEnable = True
 
 Analytical_Subjects = 1000
@@ -30,7 +29,7 @@ enable_safe_print = False
 
 
 def diffF(x,y):
-    return y*y+x*y+x*x
+    return y*y*y+x*y*y+x*x*y+x*x*x
 
 def Single_Calculation(Step, end_Scale):
 
@@ -49,7 +48,7 @@ def Single_Calculation(Step, end_Scale):
     RunKuRes = runKu.compute()
     end_time = time.time()
     print("[\033[1;33mInfo\033[0m] Runge Kutta Algorithm Spent Time:" + str(end_time - start_time) + 'seconds')
-    return (EulRes, OptEuRes, RunKuRes, end_Scale)
+    return (RunKuRes, RunKuRes, RunKuRes, end_Scale)
 
 def showRes(ResTup):
     print('-----------------Trial '+str(ResTup[3]) +'-----------------')
@@ -82,7 +81,9 @@ if __name__ == '__main__':
     print("[\033[1;33mInfo\033[0m] Start Computing Numerical Results")
     PosRes=Single_Calculation(Step, HigherScale)
     NegRes=Single_Calculation(-Step, LowerScale)
-    Res = [[np.hstack((NegRes[0][0][::-1], PosRes[0][0])), np.hstack((NegRes[0][1][::-1], PosRes[0][1]))], [np.hstack((NegRes[1][0][::-1], PosRes[1][0])), np.hstack((NegRes[1][1][::-1], PosRes[1][1]))], [np.hstack((NegRes[2][0][::-1], PosRes[2][0])), np.hstack((NegRes[2][1][::-1], PosRes[2][1]))]]
+    Res = [[np.hstack((NegRes[0][0][::-1], PosRes[0][0])), np.hstack((NegRes[0][1][::-1], PosRes[0][1]))],
+           [np.hstack((NegRes[1][0][::-1], PosRes[1][0])), np.hstack((NegRes[1][1][::-1], PosRes[1][1]))],
+           [np.hstack((NegRes[2][0][::-1], PosRes[2][0])), np.hstack((NegRes[2][1][::-1], PosRes[2][1]))]]
 
     print("[\033[1;32mInfo\033[0m] Numerical Compute Finished")
     showRes(PosRes)
@@ -91,7 +92,7 @@ if __name__ == '__main__':
     print('[\033[1;32mInfo\033[0m] Log Results Finished')
 
     # Run Analytical Results
-    if (AnaEnable):
+    if (Prob1AnalyticalEnable):
         analy = analytical()
         analy.generate_subs(Analytical_Subjects)
         anares = analy.compute(HigherScale, Analytical_Points)
@@ -107,7 +108,7 @@ if __name__ == '__main__':
             HighY = PosRes[2][1][i - 1]
             print(HighY)
             break
-    if AnaEnable:
+    if Prob1AnalyticalEnable:
         for i in range(len(anares[1])):
             if not str(anares[1][i]).find('inf') == -1:
                 HighY = anares[1][i-1]
@@ -117,7 +118,7 @@ if __name__ == '__main__':
             HighY = anares[1][-1]
     HighY = PosRes[2][1][-1]
     if GraphicEnable:
-        funcDF = FunDF(diffF,LowX,HighX,LowY,HighY,20,20)
+        funcDF = FunDF(diffF,LowX,HighX,0,HighY,20,20)
         funcDF.generate()
 
         # Plot Points
@@ -125,7 +126,7 @@ if __name__ == '__main__':
         plt.plot(Res[0][0], Res[0][1], '-', color ='blue', label ='Euler')
         plt.plot(Res[1][0], Res[1][1], '-', color ='red', label ='OptEuler')
         plt.plot(Res[2][0], Res[2][1], '-', color ='green', label ='Rung Kutta')
-        if AnaEnable:
+        if Prob1AnalyticalEnable:
             plt.plot(anares[0], anares[1], color = 'purple', label ='Analysis')
         plt.legend(loc = 'best')
         print("[\033[1;32mInfo\033[0m] Points added to plot")

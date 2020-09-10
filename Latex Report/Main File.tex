@@ -2,6 +2,7 @@
 \usepackage{authblk}
 \usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{ctex}
 \usepackage{caption}  
 \usepackage{changepage}
 \usepackage{diagbox}
@@ -13,10 +14,58 @@
  \usepgfplotslibrary{dateplot}
 \usepackage{multicol}
 \usepackage{multirow}
+\usepackage{listings}
 \usepackage{subfigure}
 \usepackage{tcolorbox}
 \usepackage{threeparttable}
 \usepackage{xpinyin}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fontspec}
+
+\definecolor{commentColor}{RGB}{53,129,34}
+\definecolor{keywordColor}{RGB}{199, 117, 50}
+\definecolor{stringColor}{RGB}{98, 123, 83}
+\definecolor{preprocessorColor}{RGB}{114, 75, 48}
+\definecolor{characterColor}{RGB}{31, 53, 207}
+\definecolor{numberColor}{RGB}{166, 166, 166}
+\definecolor{oglobalColor}{RGB}{97, 64, 154}
+\definecolor{globalColor}{RGB}{89, 127, 134}
+\definecolor{functionColor}{RGB}{135,135,197}
+\definecolor{classColor}{RGB}{146,84,139}
+
+\lstset{language=python,
+keywordstyle=\color{keywordColor},
+commentstyle=\color{commentColor},
+stringstyle=\color{stringColor},
+showstringspaces=false,
+columns=fullflexible,keepspaces,
+numbers=left,
+numberstyle=\color{numberColor}\footnotesize,
+keywords=[2]{std, cout, cin},
+keywordstyle = [2]{\color{oglobalColor}},
+keywords=[3]{endl, print, scanf, setw, setfill, setbase, setprecision, time, ctime, rand, len},
+keywordstyle = [3]{\color{functionColor}},
+keywords=[4]{\#include},
+keywordstyle =[4]{\color{preprocessorColor}},
+keywords=[5]{self},
+keywordstyle =[5]{\color{classColor}},
+literate={
+    {<<}{{{\color{black}<<}}}1
+    {>>}{{{\color{black}>>}}}1
+    {*}{{{*}}}1
+    {0}{{{\color{characterColor}0}}}1
+    {1}{{{\color{characterColor}1}}}1
+    {2}{{{\color{characterColor}2}}}1
+    {3}{{{\color{characterColor}3}}}1
+    {4}{{{\color{characterColor}4}}}1
+    {5}{{{\color{characterColor}5}}}1
+    {6}{{{\color{characterColor}6}}}1
+    {7}{{{\color{characterColor}7}}}1
+    {8}{{{\color{characterColor}8}}}1
+    {9}{{{\color{characterColor}9}}}1},
+tabsize=4
+}
 
 \geometry{top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm}
 
@@ -45,7 +94,7 @@ Determine the maximal solution of the following ODE with the initial value.
 At first, we plot the direction field of (1). After connecting the direction arrows we find that the curve seems has 2 vertical asymptotes, which approximately lies between -2.1 to -2.2 and 0.8 to 0.9.
 
 \begin{center}
-	\includegraphics[scale=0.3]{HandSketch.jpeg}
+	\includegraphics[scale=0.2]{HandSketch.jpeg}
 \end{center}
 
 \subsection{Numerical Methods}
@@ -70,7 +119,6 @@ At first, we plot the direction field of (1). After connecting the direction arr
 			$ k_{4,n} = f(t_n+h, y_n+h \cdot k_{3,n})$								&					\\
 			$ y_{n+1} = y_n+\frac{h}{6} \cdot (k_{1,n}+2 \cdot (k_{2,n}+k_{3,n})+k_{4,n})$	&					\\
 			$ t_{n+1} = t_n+h$													&					\\
-			
 		\end{tabular}
 	\end{center}
 \end{table}
@@ -215,9 +263,7 @@ In our code we could modify the number of terms based on the accuracy we need. <
 	\end{center}
 	We are interested in the points when $y_1 \rightarrow \infty$:
 	\begin{center}
-		Let $0.45 \cdot (100 \cdot \sqrt3 \cdot C_1+\sqrt3 \cdot t)=\frac{\pi}{2}$ 
-		
-		$\Rightarrow t_1 = 0.85873$
+		Let $0.45 \cdot (100 \cdot \sqrt3 \cdot C_1+\sqrt3 \cdot t)=\frac{\pi}{2}, \Rightarrow t_1 = 0.85873$
 	\end{center}
 
 	We could calculate in the same method on $y_2^2+0.8 \cdot y_2+0.8^2$ and obtained the solution:
@@ -277,9 +323,7 @@ In our code we could modify the number of terms based on the accuracy we need. <
 	We are interested in the points when $y_1 \rightarrow -\infty$:
 
 	\begin{center}
-		Let $\sqrt{3} \cdot C_1+\sqrt{3} \cdot t=\frac{\pi}{2}$
-
-		$\Rightarrow t_1 = 2.1210$
+		Let $\sqrt{3} \cdot C_1+\sqrt{3} \cdot t=\frac{\pi}{2}, \Rightarrow t_1 = 2.1210$
 	\end{center}
 
 	We could calculate in the same method on $y_2' = y_2 ^ 2-2.5 \cdot y_2+(-2.5)^2$ and obtain the solution:
@@ -416,36 +460,41 @@ To verify this observation, we first apply the Euler method and Improved Euler M
 The large difference among the computed values at t=0.5 suggests that the right vertical asymptote is lower that 0.5. Therefore, we tried several times to narrow down the interval and use the more accurate method Runge-Kutta method with fourth-order four-stage to approximate the value of the solution at $t=0.439$ and $t=0.440$.
 
 \begin{table}[H]
-	\begin{center}
-		\scriptsize
-		\renewcommand{\arraystretch}{1.2}
-		\begin{tabular}{l|l|l}
-			step h  & t=0.439 & t=0.440  \\
-			\hline
-			0.0005  & 18.7523 & 35.1483  \\
-			\hline
-			0.0001  & 22.2170 & 249.3580 \\
-			\hline
-			0.00001 & 23.2974 & inf     
-		\end{tabular}
-		\setlength{\abovecaptionskip}{0.1cm}
-		\setlength{\belowcaptionskip}{-0.9cm}
-		\caption{Runge-Kutta Approximation}\label{tab:tab2.2.2}
-	\end{center}
+	\centering
+	\begin{minipage}[b]{0.4\textwidth}
+		\begin{center}
+			\scriptsize
+			\renewcommand{\arraystretch}{1.2}
+			\begin{tabular}{l|l|l}
+				step h  & t=0.439 & t=0.440  \\
+				\hline
+				0.0005  & 18.7523 & 35.1483  \\
+				\hline
+				0.0001  & 22.2170 & 249.3580 \\
+				\hline
+				0.00001 & 23.2974 & inf     
+			\end{tabular}
+			\caption{Runge-Kutta Approximation}\label{tab:tab2.2.2}
+		\end{center}
+	\end{minipage}
+	\begin{minipage}[b]{0.4\textwidth}
+		\begin{center}
+			\scriptsize
+			\renewcommand{\arraystretch}{1.2}
+			\begin{tabular}{l|l|l|l|l}
+				t & 0.439897 & 0.439898 & 0.439899 & 0.439900 \\
+				\hline
+				y & 371.3488 & 554.8201 & 831.5077 & Inf
+			\end{tabular}
+			\caption{RK with step $h=0.000001$}\label{tab:tab2.2.3}
+		\end{center}
+
+	\end{minipage}
 \end{table}
 
 The value at $t=0.439$ is reasonable and we might well believe that the solution has a value of about 23.2974 at $t=0.439$. On the contrary, the explosion at $t=0.440$ indicates that there is a vertical asymptote between $t=0.439$ and $0.440$. 
 
-We continue our numerical process by choosing a smaller step size of $h=0.000001$ we get the following results: 
-
-\begin{table}[H]
-	\centering
-	\begin{tabular}{l|l|l|l|l}
-	t & 0.439897 & 0.439898 & 0.439899 & 0.439900 \\
-	\hline
-	y & 371.3488 & 554.8201 & 831.5077 & Inf
-	\end{tabular}
-\end{table}
+We continue our numerical process by choosing a smaller step size of $h=0.000001$ and Table \ref{tab:tab2.2.3} records the results we get.
 
 There is an abrupt increase of y at $t=0.439900$. Therefore, we obtain the vertical asymptote with the accuracy of 6 digits. If a more accurate approximation is needed, we can further reduce the step size to the desired number of digits. 
 
@@ -523,13 +572,17 @@ To handle with the left slanted asymptote we also use Runge-Kutta method to calc
 		\end{equation}
 	\end{center}
 
-	From \ref{Equ.2.3.2.1}, we could conclude that the sign of $y'$ depends on $(y+t)$
+	From \ref{Equ 2.3.2.1}, we could conclude that the sign of $y'$ depends on $(y+t)$
 	
 	\textbf{Here we will prove that the function $y(t)$ will cross the line y+t=0 first:}
 	
 	When $t<0$, the ODE starts from the initial point $y(0)=1$. When $t=0, y=1, y'=1>0$.
 	
-	Therefore, $y$ decreases when $t$ decreases. When $y+t$ reaches 0. $y'$ turns to be 0. At the point $(t_0, y_0)$ which satisfies $y+t=0$,if the horizontal axis of the point decreases $\Delta t$ ($\Delta t>0$ and $\Delta t$ is infinitesimal), the vertical axis of the point remains because $y' = 0$. For the new point $(t_1+ \Delta t, y_1)$, on the right of point $(t_1, y_1)$, shuld always be under the line $y+t=0$, which means that $t_1$+$\Delta t + y_1 < 0$. So, there is a contradiction when deciding the sign of the sum $t_1+\Delta t+y_1$ of the point $(t_1+\Delta t, y_1)$. Therefore, the point $(t_1, y_1)$ does not exist. Therefore, function $y(t)$ would not cross the line $y+t=0$ anymore.
+	Therefore, $y$ decreases when $t$ decreases. When $y+t$ reaches 0, $y'$ turns to be 0. At the point $(t_0, y_0)$ which satisfies $y+t=0$,if the x-coordinate of the point decreases $\Delta t$ ($\Delta t>0$ and $\Delta t$ is infinitesimal), the y-coordinate of the point remains because $y' = 0$. For the new point $(t_0- \Delta t, y_0), t_0=\Delta t +y_0=-\Delta t <0$. So, when $t<t_0, \textbf{y}$ increases when $t$ decreases. Using computer calculation, we could get $t_0\approx -0.729, y_0 \approx 0.729$ 
+
+	\textbf{Then we prove that function $y(t)$ owuld not cross the line $y+t=0$ anymore:}
+
+	As is proved above, when $t<t_0\approx -0.729$, $y$ increases when $t$ decreases under the condition when $y+t<0$. Aussme a point $(t_1,y_1)$ satisfies $y_1+t_1=0, t_1<t_0$ again, if this point's x-coordinate increases $\Delta t$($\Delta t > 0 and \Delta t is infinitesimal$), the y-coordinate of the point remains as $y'=0$. For the new point $(t_1+\Delta t, y_1), t_1+\Delta t+y_1=\Delta t>0$. Remember that the point $(t_1 + \Delta t, y_1)$, on the right of the point $(t_1,y_1)$, should always be under the line $y+t=0$, which means that $t_1$+$\Delta t + y_1 < 0$. So, there is a contradiction when deciding the sign of the sum $t_1+\Delta t+y_1$ of the point $(t_1+\Delta t, y_1)$. Therefore, the point $(t_1, y_1)$ does not exist. Therefore, function $y(t)$ would not cross the line $y+t=0$ anymore.
 	
 	\textbf{So, we could conclude that $y+t<0$ when $t<t_0$, where $t_0 \approx -0.729$. And $y>0$ when $t<0$.}
 	
@@ -644,4 +697,315 @@ In this problem, we try to solve the IVP with different numerical methods. Euler
 From the graph and the data, we observe that the right side of IVP2 has a vertical asymptote. By applying squeeze rule, we get that the right side asymptote is between 0.43918 and 0.44033, which agrees with our numerical method well. As for the left side, we observe that when $t$ is far less than zero, the graph is approaching to the line but always below it and it has been proved by analytical method. 
 Below is the plot based on Runge-Kutta method with step size 0.00001. 
 
+\begin{center}
+	\includegraphics[scale=0.3]{P2FinalSolution.png}
+\end{center}
+
+\newpage
+
+\section{Appendix}
+
+\subsection{The Code We Wrote}
+
+\subsubsection{Euler}
+\scriptsize
+
+\fontspec [ Path = ttf/, 
+			UprightFont = *-Medium,
+ 			BoldFont = *-bold,]
+			{JetbrainsMono}
+
+\begin{lstlisting}
+	import numpy as np
+	class Euler(object):
+		point_hist = []
+		res = ([],False)
+		def __init__(self, diff_func, step, start_point, stop_range):
+			self.diff_func = diff_func
+			self.step = step
+			self.start_point = start_point
+			self.stop_range = stop_range
+			self.overFlow = False
+			self.x = np.arange(start_point[0],stop_range,step)
+			self.y = [start_point[1]]
+	
+		def compute(self):
+			print("Start Computing Euler Results")
+			end_Str = '100%'
+			count = 0
+			for i in self.x:
+				try:
+					f = self.diff_func(i,self.y[len(self.y)-1])
+					y_new = self.y[len(self.y)-1]+self.step*f
+					self.y.append(y_new)
+				except ValueError:
+					return [self.x, self.y]
+			self.y.pop()
+			print("Compute Euler Results Finished")
+			return [self.x, self.y]
+		
+\end{lstlisting}
+\subsubsection{Improved Euler(Heun)}
+\begin{lstlisting}
+	import numpy as np
+
+	class OptEu(object):
+		point_hist = []
+
+		def __init__(self, diff_func, step, start_point, stop_range):
+			self.diff_func = diff_func
+			self.step = step
+			self.start_point = start_point
+			self.stop_range = stop_range
+			self.overFlow = False
+			self.x = np.arange(start_point[0],stop_range,step)
+			self.y = [start_point[1]]
+
+		def compute(self):
+			print("Start Computing Euler Results")
+			count = 0
+			for i in self.x:
+				try:
+					f_low = self.diff_func(i, self.y[len(self.y)-1])
+					x_high = i + self.step
+					y_high = self.y[len(self.y)-1] + self.step * f_low
+					f_high = self.diff_func(x_high, y_high)
+					y_new = self.y[len(self.y)-1] + self.step * 0.5 * (f_low + f_high)
+					self.y.append(y_new)
+				except OverflowError:
+					return [self.x, self.y]
+			self.y.pop()
+			print("Compute Improved Euler Results Finished")
+			return [self.x, self.y]
+\end{lstlisting}
+\subsubsection{Runge Kutta}
+
+\begin{lstlisting}
+	import numpy as np
+	class RunKu(object):
+		point_hist = []
+
+		def __init__(self, diff_func, step, start_point, stop_range):
+			self.diff_func = diff_func
+			self.step = step
+			self.start_point = start_point
+			self.stop_range = stop_range
+			self.overFlow = False
+			self.x = np.arange(start_point[0],stop_range,step)
+			self.y = [start_point[1]]
+
+		def compute(self):
+			print("Start Computing Runge Kutta Results")
+			for i in self.x:
+				try:
+					k1 = self.diff_func(i, self.y[len(self.y)-1])
+					x_1 = i + self.step * 0.5
+					y_1 = self.y[len(self.y)-1] + self.step * k1 * 0.5
+					k2 = self.diff_func(x_1, y_1)
+					x_2 = i + self.step * 0.5
+					y_2 = self.y[len(self.y)-1] + self.step * k2 * 0.5
+					k3 = self.diff_func(x_2, y_2)
+					x_3 = i + self.step
+					y_3 = self.y[len(self.y)-1] + self.step * k3
+					k4 = self.diff_func(x_3, y_3)
+					y_new = self.y[len(self.y)-1] + self.step / 6 * (k1 + 2 * (k2 + k3) + k4)
+					self.y.append(y_new)
+				except OverflowError:
+					return [self.x, self.y]
+			self.y.pop()
+			print("Compute Runge Kutta Results Finished")
+			return [self.x, self.y]
+\end{lstlisting}
+
+\subsubsection{Analytical Algorithm in Problem 1}
+
+\begin{lstlisting}
+	import numpy as np
+	import multiprocessing
+	class analytical:
+		def __init__(self):
+
+			self.a = [0,0,0,0]
+			self.a[0] = 1.0
+			self.a[1] = self.a[0] ** 2
+			self.a[2] = 0.5 * (2 * self.a[0] * self.a[1] + self.a[0])
+			self.a[3] = (1 + self.a[1] ** 2 + 2 * self.a[0] * self.a[2] + self.a[1])/3
+			self.y_list = []
+			self.point_nums = 1
+
+		# @params subs the terms needs to generate. (Number of a n)
+		def generate_subs(self, subs):
+			print("Start Computing Analytical Subjects")
+			while len(self.a) < subs:
+				new_a = self.a[len(self.a)-2]
+				for i in range(0, len(self.a)):
+					new_a += self.a[i]*self.a[len(self.a)-1-i]
+				self.a.append(new_a/len(self.a))
+
+			print("Successfully Compute Analytical Subjects")
+
+		def callbackfunc(self, retval):
+			self.y_list.append(retval)
+
+		def single_step(self, x):
+			y = 0
+			y+=self.a[0]
+			for i in range(1, len(self.a)):
+				y += self.a[i] * (x ** i)
+			return y
+
+		# @params end_scale means the t to stop
+		# @params point_nums the number of y need to calculated.
+		def compute(self, end_scale, point_nums = 2):
+			print("Start Compute Analytical Result")
+			pool = multiprocessing.Pool()
+			x_list = np.linspace(0, end_scale, point_nums)
+			self.point_nums = point_nums
+
+			for item in x_list:
+				# Using multiple Cores to decrease the calculate time.
+				pool.apply_async(self.single_step,[item],callback=self.callbackfunc) 
+			pool.close()
+			pool.join()
+			print("Successfully Compute Analytical Result")
+			return (x_list, self.y_list)
+\end{lstlisting}
+
+\subsubsection{Main File}
+\begin{lstlisting}
+	from __future__ import division
+	import sys
+
+	import warnings
+	warnings.filterwarnings("ignore")
+
+	from Euler_Method import *
+	from Opt_Euler_Method import *
+	from RungKutta_Method import *
+	from analytical import *
+	from Function_DF import *
+
+	import matplotlib.pyplot as plt
+	import numpy as np
+	import time
+	sys.setrecursionlimit(100000)
+
+	start_Point = (0, 1)
+	Step = 0.0000001
+	HigherScale = 0.43
+	LowerScale = -5
+
+	Prob1AnalyticalEnable = False
+	GraphicEnable = True
+
+	Analytical_Subjects = 1000
+	Analytical_Points = 100
+	enable_safe_print = False
+
+
+	def diffF(x,y):
+		return y*y+x*y+x*x
+
+	def Single_Calculation(Step, end_Scale):
+
+		euler = Euler(diffF, Step, start_Point, end_Scale)
+		optEu = OptEu(diffF, Step, start_Point, end_Scale)
+		runKu = RunKu(diffF, Step, start_Point, end_Scale)
+		start_time = time.time()
+		EulRes = euler.compute()
+		end_time = time.time()
+		print("Euler Algorithm Spent Time:" + str(end_time - start_time) + 'seconds')
+		start_time = time.time()
+		OptEuRes = optEu.compute()
+		end_time = time.time()
+		print("Improved Euler Algorithm Spent Time:" + str(end_time - start_time) + 'seconds')
+		start_time = time.time()
+		RunKuRes = runKu.compute()
+		end_time = time.time()
+		print("Runge Kutta Algorithm Spent Time:" + str(end_time - start_time) + 'seconds')
+		return (EulRes, OptEuRes, RunKuRes, end_Scale)
+
+	def showRes(ResTup):
+		print('-----------------Trial '+str(ResTup[3]) +'-----------------')
+		if not (str(ResTup[0][1][-1]).find('inf') == -1) and enable_safe_print:
+			print('Euler Overflow')
+		else:
+			print('Euler: ' + str(ResTup[0][1][-1]))
+
+		if not (str(ResTup[1][1][-1]).find('inf') == -1) and enable_safe_print:
+			print('Advanced Euler Overflow')
+		else:
+			print('Opt Euler: ' + str(ResTup[1][1][-1]))
+		if not (str(ResTup[2][1][-1]).find('inf') == -1) and enable_safe_print:
+			print('Rung Kutta Overflow')
+		else:
+			print('Rung Kutta: ' + str(ResTup[2][1][-1]))
+
+	def log_Res(Res):
+		file = open('result.csv','w')
+		header = 'x,Euler, Advanced Euler, Rung Kutta\n'
+		lines = [header]
+		for i in range(len(Res[0][0])):
+			lines.append(str(Res[2][0][i])+','+ str(Res[0][1][i])+ ',' + str(Res[1][1][i])+ ','+str(Res[2][1][i])+ '\n')
+		file.writelines(lines)
+		file.close()
+
+	if __name__ == '__main__':
+
+		# Run Calculation
+		print("Start Computing Numerical Results")
+		PosRes=Single_Calculation(Step, HigherScale)
+		NegRes=Single_Calculation(-Step, LowerScale)
+		Res = [[np.hstack((NegRes[0][0][::-1], PosRes[0][0])), np.hstack((NegRes[0][1][::-1], PosRes[0][1]))],
+			  [np.hstack((NegRes[1][0][::-1], PosRes[1][0])), np.hstack((NegRes[1][1][::-1], PosRes[1][1]))],
+			  [np.hstack((NegRes[2][0][::-1], PosRes[2][0])), np.hstack((NegRes[2][1][::-1], PosRes[2][1]))]]
+
+		print("Numerical Compute Finished")
+		showRes(Res)
+		print('Start log Results')
+		log_Res(Res)
+		print('Log Results Finished')
+
+		# Run Analytical Results
+		if (Prob1AnalyticalEnable):
+			analy = analytical()
+			analy.generate_subs(Analytical_Subjects)
+			anares = analy.compute(HigherScale, Analytical_Points)
+
+		# Plot Direction Field
+		LowX = NegRes[0][0][-1]
+		HighX = PosRes[0][0][-1]
+		LowY = NegRes[2][1][-1]
+		HighY = start_Point[1]
+		for i in range(len(PosRes[2][1])):
+			if not str(PosRes[2][1][i]).find('inf') == -1:
+				HighY = PosRes[2][1][i - 1]
+				print(HighY)
+				break
+		if Prob1AnalyticalEnable:
+			for i in range(len(anares[1])):
+				if not str(anares[1][i]).find('inf') == -1:
+					HighY = anares[1][i-1]
+					print(HighY)
+					break
+			if HighY == start_Point[1]:
+				HighY = anares[1][-1]
+		HighY = PosRes[2][1][-1]
+		if GraphicEnable:
+			funcDF = FunDF(diffF,LowX,HighX,0,HighY,20,20)
+			funcDF.generate()
+
+			# Plot Points
+			print("Add points to plot")
+			plt.plot(Res[0][0], Res[0][1], '-', color ='blue', label ='Euler')
+			plt.plot(Res[1][0], Res[1][1], '-', color ='red', label ='OptEuler')
+			plt.plot(Res[2][0], Res[2][1], '-', color ='green', label ='Rung Kutta')
+			if Prob1AnalyticalEnable:
+				plt.plot(anares[0], anares[1], color = 'purple', label ='Analysis')
+			plt.legend(loc = 'best')
+			print("Points added to plot")
+			print("Generating plot")
+			plt.show()
+			print("Plot Generated")
+\end{lstlisting}
 \end{document}

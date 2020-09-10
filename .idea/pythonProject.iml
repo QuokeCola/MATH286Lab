@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/matlabintpre" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (MATH286Lab)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="MacEnv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
