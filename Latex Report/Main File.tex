@@ -30,6 +30,8 @@
 \affil{Department of Mechanical Engineering, ZJUI}
 \renewcommand\Authands{ and }
 
+\setlength{\textfloatsep}{5pt}
+
 \begin{document}
 \setlength{\parindent}{0pt}
 \maketitle
@@ -188,13 +190,8 @@ In our code we could modify the number of terms based on the accuracy we need. <
 
 \subsubsection{Analytical Method for Vertical Asymptotes}
 
-\begin{multicols}{2}
-	\small
-	\paragraph{\small Analytical Method on the Right}
-	
-	~\\
-	
-	Note that, on $0\leq t \leq 1$,
+	%%%%%%%%%%%%%%%%%%%%%%%%%%Right%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\paragraph{Analytical Method on the Right.} Note that, on $0\leq t \leq 1$,
 
 	\begin{center}
 		$y'=y^2+t \cdot y+t^2 \geq t \cdot y$
@@ -242,15 +239,9 @@ In our code we could modify the number of terms based on the accuracy we need. <
 		$0.85873 \leq t \leq 0.85891$,
 	\end{center}
 	 Which agrees with our results in numerical method well.
-
-	\vfill\null
-	\columnbreak
-
-	\paragraph{\small Analytical Method on the Left} 
-
-	~\\
 	
-	Note that, on $t \leq 0$,
+	%%%%%%%%%%%%%%%%%%%%%%%%%%Left%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\paragraph{Analytical Method on the Left.} Note that, on $t \leq 0$,
 
 	\begin{center}
 		$y'=y^2+t \cdot y+t^2 \geq t \cdot y$
@@ -312,9 +303,6 @@ In our code we could modify the number of terms based on the accuracy we need. <
 
 	Which conforms our result in numerical approximation well.
 
-\end{multicols}
-
-\newpage
 \subsection{Conclusion}
 
 \subsubsection{Error Comparison}
@@ -366,16 +354,17 @@ During our calculation, we find that the values closed to the asymptotes are mor
 		\centering
 		\begin{minipage}[b]{0.4\textwidth}
 			\centering
-			\includegraphics[width=0.5\textwidth]{P1FinalSolution.png}
+			\includegraphics[width=0.7\textwidth]{P1FinalSolution.png}
 			\caption{RK with h=0.0000001}
 			\label{fig:1.4.2.1}
 		\end{minipage}
 		\begin{minipage}[b]{0.4\textwidth}
 			\centering
-			\includegraphics[width=0.5\textwidth]{Problem2HandSketch.jpeg}
+			\includegraphics[width=0.7\textwidth]{Problem2HandSketch.jpeg}
 			\caption{Hand-drawn Curve of Problem2}
 			\label{fig:2.0.1}
 		\end{minipage}
+
 	\end{figure}
 \end{center}
 
@@ -418,7 +407,7 @@ To verify this observation, we first apply the Euler method and Improved Euler M
 			0.05&1.8161&2.1699&2.8257&7.02571\\
 			0.01&2.6593&3.0070&756.8174&inf\\
 		\end{tabular}
-			\setlength{\abovecaptionskip}{0.1cm}
+		\setlength{\abovecaptionskip}{0.1cm}
 		\setlength{\belowcaptionskip}{-0.9cm}
 		\caption{Euler and Heun Approximation at t = 0.4 \& 0.5 within different steps}\label{tab:tab2.2.1}
 	\end{center}
@@ -439,6 +428,9 @@ The large difference among the computed values at t=0.5 suggests that the right 
 			\hline
 			0.00001 & 23.2974 & inf     
 		\end{tabular}
+		\setlength{\abovecaptionskip}{0.1cm}
+		\setlength{\belowcaptionskip}{-0.9cm}
+		\caption{Runge-Kutta Approximation}\label{tab:tab2.2.2}
 	\end{center}
 \end{table}
 
@@ -469,13 +461,8 @@ To handle with the left slanted asymptote we also use Runge-Kutta method to calc
 \end{table}
 
 \subsection{Analytical Method-Further Approximation}
-\begin{multicols}{2}
-	\small
-	\paragraph{\small Vertical Asymptote on the Right}
-	
-	~\\
-	
-	Note that, on $0 \leq t \leq 1$, $y > 0$. We have ensured that the vertical asymptote locates in the interval $0.4 \leq t \leq 0.5$ from the direction field. Based on this, we could have a further squeeze formula: 
+	%%%%%%%%%%%%%%%%%%%%%%%%%%Right%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\paragraph{Vertical Asymptote on the Right.} Note that, on $0 \leq t \leq 1$, $y > 0$. We have ensured that the vertical asymptote locates in the interval $0.4 \leq t \leq 0.5$ from the direction field. Based on this, we could have a further squeeze formula: 
 	
 	\begin{center}
 		$y^3+0.4 \cdot y^2 + 0.4^2 \cdot y + 0.4^3 \leq y' = y^2+t \cdot y + t^2 \leq y^3 + 0. \cdot y^2 + 0.5^2 \cdot y + 0.5^3$
@@ -527,11 +514,9 @@ To handle with the left slanted asymptote we also use Runge-Kutta method to calc
 	
 	Which agrees our results in numerical approximation well.
 	
-	\paragraph{\small The Asymptote on the Left}
 	
-	~\\
-	
-	After the factorization we could get
+	%%%%%%%%%%%%%%%%%%%%%%%%%%Left%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\paragraph{The Asymptote on the Left.}	After the factorization we could get
 	\begin{center}
 		\begin{equation}
 			y'=(y+t)\cdot (y^2 + t^2) \tag{Equ 2.3.2.1} \label{Equ.2.3.2.1}
@@ -632,7 +617,6 @@ To handle with the left slanted asymptote we also use Runge-Kutta method to calc
 
 	Therefore, function $y(t)$'s asymptotic line is $y+t=0$ when $t \rightarrow -\infty$.
 	
-\end{multicols}
 
 
 
