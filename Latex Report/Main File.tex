@@ -2,7 +2,7 @@
 \usepackage{authblk}
 \usepackage{amsmath}
 \usepackage{booktabs}
-\usepackage{ctex}
+%\usepackage{ctex}
 \usepackage{caption}  
 \usepackage{changepage}
 \usepackage{diagbox}
@@ -22,6 +22,7 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{fontspec}
+\usepackage{hyperref}
 
 \definecolor{commentColor}{RGB}{53,129,34}
 \definecolor{keywordColor}{RGB}{199, 117, 50}
@@ -71,15 +72,20 @@ tabsize=4
 
 \title{Math 286 Lab Project}
 \date{2020, Sept, 11th}
-\author{\textbf{Ruan Yucheng} 3180111}
+\author{\textbf{Ruan Yucheng} 3180111636}
 \author{\textbf{Zhang Zheyuan} 3180111607}
-\author{\textbf{Wu Zheyu} 3180111}
+\author{\textbf{Wu Zheyu} 3180111600}
 \author{\textbf{Qian Chen} 3180111591}
-\author{\textbf{Zheng Xiuwen} 3180111}
-\affil{Department of Mechanical Engineering, ZJUI}
+\author{\textbf{Zheng Xiuwen} 3180111639}
+\affil{We declare that this report is our own original work, and every work group member has a fair share in this work. For the preparation of the report we have not used any other resources than the Math 286 lecture material and the references cited in the report.}
 \renewcommand\Authands{ and }
 
 \setlength{\textfloatsep}{5pt}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black
+}
 
 \begin{document}
 \setlength{\parindent}{0pt}
@@ -105,14 +111,14 @@ At first, we plot the direction field of (1). After connecting the direction arr
 		\scriptsize
 		\renewcommand{\arraystretch}{1.3} % default is 1.0
 		\begin{tabular}{p{8cm}|p{8cm}}
-			\textbf{Euler}: <code>			& \quad\textbf{Heun}: <code>				\\
+			\textbf{Euler}: \hyperref[Euler]{<code>}		& \quad\textbf{Heun}: \hyperref[Heun]{<code>}				\\
 			$y_{n+1} = y_n+h \cdot f(t_n, y_n)$	& \quad$ k_{1,n} = f(t_n,y_n)$				\\
 			$ t_{n+1} = t_n+h$				& \quad$ k_{2,n} = f(t_n+h, y_n+h \cdot k_{1,n})$	\\
 											& \quad$ y_{n+1} = y_n+h \cdot f(t_n, y_n)$		\\
 											& \quad$ t_{n+1} = t_n+h$					\\
 										 	
 			
-			\textbf{Runge Kutta}: <code>										&					\\
+			\textbf{Runge Kutta}: \hyperref[Runge Kutta]{<code>}										&					\\
 			$ k_{1,n} = f(t_n,y_n)$												&					\\
 			$ k_{2,n} = f(t_n+\frac{h}{2}, y_n+\frac{h}{2} \cdot k_{1,n})$			&					\\
 			$ k_{3,n} = f(t_n+\frac{h}{2}, y_n+\frac{h}{2} \cdot k_{2,n})$			&					\\
@@ -172,7 +178,7 @@ Combined with the table, the direction field and the hand-drawing sketches, we c
 \end{table}
 From Table \ref{tab:tab1.2.2.1} we could find that $y$ at $t = -2.2$ and $t = 0.9$ if we decrease the step size, the value will increase/decrease rapidly and finally exceed the range that numpy can hold. But when $t = -2.1$ and $t = 0.8$, $y$ will finally get to a certain value.
 
-The large difference among the computed values with different step size at $t = -2.2$ and $t = 0.9$ indicated that there may has 2 vertical asymptotes lies in $-2.2<t<2.1$ and $0.8<t<0.9$, respectively. To narrow down the interval, we chose fourth order  Runge-Kutta method with a smaller step size $h=0.0000001$. In comparision, we also compute the Improved Euler (Heun) Method's results.
+The large difference among the computed values with different step sizes at $t = -2.2$ and $t = 0.9$ indicated that there may has 2 vertical asymptotes lies in $-2.2<t<2.1$ and $0.8<t<0.9$, respectively. To narrow down the interval, we chose fourth order  Runge-Kutta method with a smaller step size $h=0.0000001$. In comparision, we also compute the Improved Euler (Heun) Method's results.
 
 \begin{table}[H]
 	\scriptsize
@@ -498,7 +504,7 @@ We continue our numerical process by choosing a smaller step size of $h=0.000001
 
 There is an abrupt increase of y at $t=0.439900$. Therefore, we obtain the vertical asymptote with the accuracy of 6 digits. If a more accurate approximation is needed, we can further reduce the step size to the desired number of digits. 
 
-To handle with the left slanted asymptote we also use Runge-Kutta method to calculate. By the data we predict the left slanted asymptote is $y=-t$ because the error is decreasing while t is increasing.
+To handle with the left slanted asymptote we also use Runge-Kutta method to calculate. By the data we predict the left slanted asymptote is $y=-t$ because the error is decreasing while t is decreasing.
 
 \begin{table}[H]
 	\centering
@@ -695,7 +701,7 @@ After collecting all data together, we observed that while step size is getting 
 
 In this problem, we try to solve the IVP with different numerical methods. Euler Method, Improved Euler method and Runge-Kutta Method have been used as numerical approaches with different step size. We observe that when we decreased the step sizes, the values calculated by three methods converges to a same value. Therefore, to determine a better method for this problem, we have set a standard value and compare by which method the values can get closer to the standard value with larger step size. 
 From the graph and the data, we observe that the right side of IVP2 has a vertical asymptote. By applying squeeze rule, we get that the right side asymptote is between 0.43918 and 0.44033, which agrees with our numerical method well. As for the left side, we observe that when $t$ is far less than zero, the graph is approaching to the line but always below it and it has been proved by analytical method. 
-Below is the plot based on Runge-Kutta method with step size 0.00001. 
+Below is the plot based on Runge-Kutta method with step size 0.0000001. 
 
 \begin{center}
 	\includegraphics[scale=0.3]{P2FinalSolution.png}
@@ -707,7 +713,13 @@ Below is the plot based on Runge-Kutta method with step size 0.00001.
 
 \subsection{The Code We Wrote}
 
-\subsubsection{Euler}
+This section reveals the code we wrote (in python). We used Github to record our progress and you can also clone and view them with your own IDE. Here is our project's link:
+
+\begin{center}
+	\url{https://github.com/QuokeCola/MATH286Lab}
+\end{center}
+
+\subsubsection{Euler}\label{Euler}
 \scriptsize
 
 \fontspec [ Path = ttf/, 
@@ -745,7 +757,7 @@ Below is the plot based on Runge-Kutta method with step size 0.00001.
 			return [self.x, self.y]
 		
 \end{lstlisting}
-\subsubsection{Improved Euler(Heun)}
+\subsubsection{Improved Euler(Heun)}\label{Heun}
 \begin{lstlisting}
 	import numpy as np
 
@@ -778,7 +790,7 @@ Below is the plot based on Runge-Kutta method with step size 0.00001.
 			print("Compute Improved Euler Results Finished")
 			return [self.x, self.y]
 \end{lstlisting}
-\subsubsection{Runge Kutta}
+\subsubsection{Runge Kutta}\label{Runge Kutta}
 
 \begin{lstlisting}
 	import numpy as np
